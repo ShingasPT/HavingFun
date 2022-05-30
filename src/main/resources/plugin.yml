@@ -1,0 +1,14 @@
+name: Havingfun
+version: '${version}'
+main: me.shingaspt.plugins.havingfun.Havingfun
+api-version: 1.18
+prefix: HavingFun
+authors: [ ShingasPT ]
+description: Quick Plugin to Have Fun!
+website: https://github.com/ShingasPT/HavingFun
+depend: [ NBTAPI ]
+commands:
+  box:
+    description: 'Opens a Box Gui'
+  blocks:
+    description: 'Shows yours/a players unlocked blocks'
