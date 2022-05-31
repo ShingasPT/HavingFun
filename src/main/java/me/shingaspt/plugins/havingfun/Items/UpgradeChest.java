@@ -18,14 +18,10 @@ public class UpgradeChest extends ItemStack {
         this.setAmount(1);
         this.setType(Material.CHEST);
 
-        NBTItem nbt = new NBTItem(this);
-        nbt.setString("Upgrades", String.valueOf(upgrades));
-        nbt.setString("UpgradePrice", String.valueOf(price));
-
         ItemMeta meta = this.getItemMeta();
         meta.displayName(mm.deserialize("<italic:false><gradient:#FF5400:#E0EC00>Upgrade Mine</gradient>"));
-        TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("upgrade", nbt.getString("Upgrades")),
-                                                        Placeholder.parsed("price", nbt.getString("UpgradePrice")));
+        TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("upgrade", String.valueOf(upgrades)),
+                                                        Placeholder.parsed("price", String.valueOf(price)));
         meta.lore(Arrays.asList(mm.deserialize(""),
                                 mm.deserialize("<italic:false><gray>Use /blocks to see the blocks you have!"),
                                 mm.deserialize(""),

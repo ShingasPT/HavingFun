@@ -1,6 +1,5 @@
 package me.shingaspt.plugins.havingfun.Blocks;
 
-import de.tr7zw.nbtapi.NBTItem;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
@@ -18,13 +17,10 @@ public class Stone extends ItemStack {
         this.setAmount(1);
         this.setType(Material.STONE);
 
-        NBTItem nbt = new NBTItem(this);
-        nbt.setString("Reward", "2");
-
         ItemMeta meta = this.getItemMeta();
-        meta.displayName(mm.deserialize("<italic:false><gradient:#6A6A6A:#909090>Stone"));
+        meta.displayName(mm.deserialize("<italic:false><gradient:#515151:#727272>Stone"));
 
-        TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("reward", nbt.getString("Reward")));
+        TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("reward", "2"));
         meta.lore(Arrays.asList(mm.deserialize(""),
                 mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Reward » <reward></gradient>", placeholder)));
 
