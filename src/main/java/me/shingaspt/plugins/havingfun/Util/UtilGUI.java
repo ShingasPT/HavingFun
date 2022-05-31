@@ -76,7 +76,7 @@ public class UtilGUI {
 
         skullMeta.setOwningPlayer(p);
 
-        skullMeta.displayName(UtilMessages.getPlayerDisplayName(p));
+        skullMeta.displayName(getPlayerDisplayName(p));
         skull.setItemMeta(skullMeta);
 
         return skull;
@@ -89,5 +89,10 @@ public class UtilGUI {
     public static Component getBoxTitle(Player p) {
         TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
         return mm.deserialize("<player> <bold><gold>Box", placeholder);
+    }
+
+    public static Component getPlayerDisplayName(Player p) {
+        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
+        return mm.deserialize("<italic:false><player>",placeholder);
     }
 }

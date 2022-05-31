@@ -62,7 +62,7 @@ public class EventsListener implements Listener {
                     PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
                     int reward = Integer.parseInt(new NBTItem(event.getCurrentItem()).getString("Reward"));
                     player.setBalance(player.getBalance() + reward);
-                    event.getInventory().setItem(12, UtilGUI.getPlayerSkull(p));
+                    event.getInventory().setItem(0, UtilGUI.getPlayerSkull(p));
                     event.getInventory().setItem(event.getSlot(), new PlaceholderItem());
                     Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId())), 120);
                 }
