@@ -18,7 +18,7 @@ public class UpgradeChest extends ItemStack {
         this.setType(Material.CHEST);
 
         ItemMeta meta = this.getItemMeta();
-        meta.displayName(mm.deserialize("<italic:false><gradient:#FF5400:#E0EC00>Upgrade Mine</gradient>"));
+        meta.displayName(mm.deserialize("<italic:false><gradient:#8700BE:#C600B8>Upgrade Mine</gradient>"));
         TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("upgrade", String.valueOf(upgrades)),
                                                         Placeholder.parsed("price", String.valueOf(price)));
         meta.lore(Arrays.asList(mm.deserialize(""),

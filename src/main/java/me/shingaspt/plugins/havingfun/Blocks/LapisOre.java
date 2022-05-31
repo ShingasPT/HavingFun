@@ -13,20 +13,20 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 
-public class Stone extends ItemStack {
+public class LapisOre extends ItemStack {
 
     private static final MiniMessage mm = MiniMessage.miniMessage();
 
-    public Stone(){
+    public LapisOre(){
         this.setAmount(1);
-        this.setType(Material.STONE);
+        this.setType(Material.LAPIS_ORE);
 
         ItemMeta meta = this.getItemMeta();
-        meta.displayName(mm.deserialize("<italic:false><gradient:#515151:#727272>Stone"));
+        meta.displayName(mm.deserialize("<italic:false><gradient:#053BC6:#06A4FD>Lapis Ore"));
 
         PersistentDataContainer container = meta.getPersistentDataContainer();
         NamespacedKey key = new NamespacedKey(HavingFun.getInstance(), "Reward");
-        container.set(key, PersistentDataType.INTEGER, 2);
+        container.set(key, PersistentDataType.INTEGER, 6);
 
         TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("reward", String.valueOf(container.get(key, PersistentDataType.INTEGER))));
         meta.lore(Arrays.asList(mm.deserialize(""),
@@ -34,5 +34,4 @@ public class Stone extends ItemStack {
 
         this.setItemMeta(meta);
     }
-
 }

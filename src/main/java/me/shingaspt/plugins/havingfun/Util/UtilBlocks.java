@@ -1,7 +1,6 @@
 package me.shingaspt.plugins.havingfun.Util;
 
-import me.shingaspt.plugins.havingfun.Blocks.Cobblestone;
-import me.shingaspt.plugins.havingfun.Blocks.Stone;
+import me.shingaspt.plugins.havingfun.Blocks.*;
 import me.shingaspt.plugins.havingfun.Data.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
@@ -25,6 +24,12 @@ public class UtilBlocks {
     public static void loadBlocks(){
         blocks.add(new Cobblestone());
         blocks.add(new Stone());
+        blocks.add(new IronOre());
+        blocks.add(new GoldOre());
+        blocks.add(new RedstoneOre());
+        blocks.add(new LapisOre());
+        blocks.add(new DiamondOre());
+        blocks.add(new EmeraldOre());
         Bukkit.getLogger().info("Blocks have been successfully loaded!");
     }
 
