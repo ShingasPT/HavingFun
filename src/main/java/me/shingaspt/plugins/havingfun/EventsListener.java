@@ -1,6 +1,5 @@
 package me.shingaspt.plugins.havingfun;
 
-import de.tr7zw.nbtapi.NBTItem;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import me.shingaspt.plugins.havingfun.Data.PlayerData;
@@ -14,6 +13,7 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +21,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 public class EventsListener implements Listener {
@@ -60,8 +62,13 @@ public class EventsListener implements Listener {
             }else if(UtilGUI.getMineSlots().contains(event.getSlot())){
                 if(!(event.getCurrentItem().isSimilar(new PlaceholderItem()))){
                     PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
-                    int reward = Integer.parseInt(new NBTItem(event.getCurrentItem()).getString("Reward"));
+
+                    PersistentDataContainer container = event.getCurrentItem().getItemMeta().getPersistentDataContainer();
+                    NamespacedKey key = new NamespacedKey(HavingFun.getInstance(), "Reward");
+
+                    int reward = container.get(key, PersistentDataType.INTEGER);
                     player.setBalance(player.getBalance() + reward);
+
                     event.getInventory().setItem(0, UtilGUI.getPlayerSkull(p));
                     event.getInventory().setItem(event.getSlot(), new PlaceholderItem());
                     Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId())), 120);

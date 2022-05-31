@@ -1,6 +1,5 @@
 package me.shingaspt.plugins.havingfun.Items;
 
-import de.tr7zw.nbtapi.NBTItem;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
