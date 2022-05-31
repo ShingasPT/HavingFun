@@ -34,7 +34,7 @@ public class EventsListener implements Listener {
 
         if(event.getView().title().equals(UtilGUI.getBoxTitle(p))){
             event.setCancelled(true);
-            if (event.getSlot() == 14) {
+            if (event.getSlot() == 8) {
                 PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
                 int upgrades = player.getUpgrades();
                 int upgradePrice = player.getUpgradePrice();
@@ -49,8 +49,8 @@ public class EventsListener implements Listener {
                         player.setUpgrades(player.getUpgrades() + 1);
                         player.setUpgradePrice(player.getUpgradePrice() * 2);
                         p.playSound(p, Sound.ENTITY_PLAYER_LEVELUP, 1, 0);
-                        event.getInventory().setItem(14, new UpgradeChest(player.getUpgrades(), player.getUpgradePrice()));
-                        event.getInventory().setItem(12, UtilGUI.getPlayerSkull(p));
+                        event.getInventory().setItem(8, new UpgradeChest(player.getUpgrades(), player.getUpgradePrice()));
+                        event.getInventory().setItem(0, UtilGUI.getPlayerSkull(p));
                     }else{
                         p.sendMessage(mm.deserialize("<red>Insufficient balance to do this purchase!"));
                         p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 0);
