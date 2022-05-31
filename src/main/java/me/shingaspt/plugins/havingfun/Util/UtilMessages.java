@@ -38,6 +38,6 @@ public class UtilMessages {
 
     public static Component getLeaveMessage(Player p) {
         TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        return mm.deserialize("<gold>Hope to see you soon <player><gold>! <gray>[<reed>-<gray>]", placeholder);
+        return mm.deserialize("<gold>Hope to see you soon <player><gold>! <gray>[<red>-<gray>]", placeholder);
     }
 }

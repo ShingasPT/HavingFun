@@ -4,7 +4,6 @@ import me.shingaspt.plugins.havingfun.Blocks.Stone;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 public class PlayerData {
@@ -13,15 +12,12 @@ public class PlayerData {
     private int upgrades;
     private int upgradePrice;
     private final UUID uuid;
-    private final ArrayList<ItemStack> playerBlocks;
 
     public PlayerData(UUID uuid){
-        this.balance = 0;
+        this.balance = 100;
         this.upgrades = 0;
         this.upgradePrice = 100;
         this.uuid = uuid;
-        this.playerBlocks = new ArrayList<>();
-        this.playerBlocks.add(new Stone());
     }
 
     public int getUpgrades() {
@@ -46,10 +42,6 @@ public class PlayerData {
 
     public void setBalance(int balance) {
         this.balance = balance;
-    }
-
-    public ArrayList<ItemStack> getPlayerBlocks() {
-        return playerBlocks;
     }
 
     public UUID getUUID() { return uuid; }

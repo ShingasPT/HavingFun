@@ -10,19 +10,19 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 
-public class Stone extends ItemStack {
+public class Cobblestone extends ItemStack {
 
     private static final MiniMessage mm = MiniMessage.miniMessage();
 
-    public Stone(){
+    public Cobblestone(){
         this.setAmount(1);
-        this.setType(Material.STONE);
+        this.setType(Material.COBBLESTONE);
 
         NBTItem nbt = new NBTItem(this);
-        nbt.setString("Reward", "2");
+        nbt.setString("Reward", "1");
 
         ItemMeta meta = this.getItemMeta();
-        meta.displayName(mm.deserialize("<italic:false><gradient:#6A6A6A:#909090>Stone"));
+        meta.displayName(mm.deserialize("<italic:false><gradient:#6D6D6D:#868686>Cobblestone"));
 
         TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("reward", nbt.getString("Reward")));
         meta.lore(Arrays.asList(mm.deserialize(""),
@@ -30,5 +30,4 @@ public class Stone extends ItemStack {
 
         this.setItemMeta(meta);
     }
-
 }

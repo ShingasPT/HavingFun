@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'me.shingaspt.plugins'
-version = '1.6'
+version = '2'
 
 repositories {
     mavenCentral()

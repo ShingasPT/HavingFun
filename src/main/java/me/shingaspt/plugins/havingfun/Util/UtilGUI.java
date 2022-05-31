@@ -25,10 +25,7 @@ public class UtilGUI {
 
     public static Inventory getBoxInventory(Player p, int upgrades, int price) {
 
-        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        Component title = mm.deserialize("<player> <bold><gold>Box", placeholder);
-
-        Inventory temp = Bukkit.createInventory(null, 54, title);
+        Inventory temp = Bukkit.createInventory(null, 54, getBoxTitle(p));
 
         for(int slot: mineSlots){
             temp.setItem(slot, UtilBlocks.getRandomBlock(p.getUniqueId()));
@@ -43,32 +40,13 @@ public class UtilGUI {
 
     }
 
-    public static ItemStack getPlayerSkull(Player p){
-
-        ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1 );
-        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
-
-        skullMeta.displayName(p.displayName());
-
-        TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("price", String.valueOf(UtilPlayerData.getBalance(p.getUniqueId()))));
-        skullMeta.lore(Arrays.asList(mm.deserialize(""), mm.deserialize("<gradient:#A600FF:#D200EC>Balance » <price></gradient>",placeholder)));
-
-        skullMeta.setOwningPlayer(p);
-        skull.setItemMeta(skullMeta);
-
-        return skull;
-    }
-
     public static Inventory getBlocksInventory(Player p) {
 
-        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        Component title = mm.deserialize("<player> <bold><gold>Blocks", placeholder);
-
-        Inventory temp = Bukkit.createInventory(null, 54, title);
+        Inventory temp = Bukkit.createInventory(null, 54, getBlocksTitle(p));
 
         PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
-        for(ItemStack block : player.getPlayerBlocks()){
-            temp.addItem(block);
+        for(int i = 0; i <= player.getUpgrades(); i++){
+            temp.addItem(UtilBlocks.getAllBlocks().get(i));
         }
 
         fillInv(temp, new LockedItem());
@@ -86,5 +64,30 @@ public class UtilGUI {
 
     public static ArrayList<Integer> getMineSlots(){
         return mineSlots;
+    }
+
+    public static ItemStack getPlayerSkull(Player p){
+
+        ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1 );
+        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+
+        TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("balance", String.valueOf(UtilPlayerData.getBalance(p.getUniqueId()))));
+        skullMeta.lore(Arrays.asList(mm.deserialize(""), mm.deserialize("<italic:false><gradient:#A600FF:#D200EC>Balance » <balance></gradient>",placeholder)));
+
+        skullMeta.setOwningPlayer(p);
+
+        skullMeta.displayName(p.displayName());
+        skull.setItemMeta(skullMeta);
+
+        return skull;
+    }
+    public static Component getBlocksTitle(Player p){
+        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
+        return mm.deserialize("<player> <bold><gold>Blocks", placeholder);
+    }
+
+    public static Component getBoxTitle(Player p) {
+        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
+        return mm.deserialize("<player> <bold><gold>Box", placeholder);
     }
 }
