@@ -68,7 +68,6 @@ public class EventsListener implements Listener {
                 }
             }
         }else if(event.getView().title().equals(UtilGUI.getBlocksTitle(p))){
-            p.sendMessage(new NBTItem(event.getCurrentItem()).getString("Reward"));
             event.setCancelled(true);
         }
     }
