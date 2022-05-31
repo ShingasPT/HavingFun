@@ -31,10 +31,10 @@ public class UtilGUI {
             temp.setItem(slot, UtilBlocks.getRandomBlock(p.getUniqueId()));
         }
 
-        fillInv(temp, new InvFrame());
-
         temp.setItem(12, getPlayerSkull(p));
         temp.setItem(14, new UpgradeChest(upgrades, price));
+
+        fillInv(temp, new InvFrame());
 
         return temp;
 

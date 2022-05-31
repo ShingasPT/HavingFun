@@ -27,7 +27,8 @@ public class UpgradeChest extends ItemStack {
         TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("upgrade", nbt.getString("Upgrade")),
                                                         Placeholder.parsed("price", nbt.getString("UpgradePrice")));
         meta.lore(Arrays.asList(mm.deserialize(""),
-                                mm.deserialize("<italic:false><gray>Use /blocks to find out what blocks you have/can get!"),
+                                mm.deserialize("<italic:false><gray>Use /blocks to find out"),
+                                mm.deserialize("<italic:false><gray>what blocks you have/can get!"),
                                 mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Upgrades » <upgrade></gradient>", placeholders),
                                 mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Upgrade Price » <price></gradient>", placeholders)));
         this.setItemMeta(meta);

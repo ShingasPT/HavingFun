@@ -14,9 +14,12 @@ public class UtilBlocks {
 
     public static ItemStack getRandomBlock(UUID uuid){
         PlayerData player = UtilPlayerData.getPlayerFromUUID(uuid);
-        Random rand = new Random();
-        int random = rand.nextInt(player.getUpgrades());
-        return UtilBlocks.getAllBlocks().get(random);
+        if(player.getUpgrades() != 0){
+            Random rand = new Random();
+            int random = rand.nextInt(player.getUpgrades());
+            return UtilBlocks.getAllBlocks().get(random);
+        }
+        return new Cobblestone();
     }
 
     public static void loadBlocks(){

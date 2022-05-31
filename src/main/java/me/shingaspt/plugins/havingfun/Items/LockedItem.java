@@ -16,7 +16,9 @@ public class LockedItem extends ItemStack {
         this.setType(Material.RED_STAINED_GLASS_PANE);
         ItemMeta meta = this.getItemMeta();
         meta.displayName(mm.deserialize("<italic:false><red>Locked Block"));
-        meta.lore(Arrays.asList(mm.deserialize(""), mm.deserialize("<italic:false><dark_gray>You haven't unlocked this block yet"),mm.deserialize("<dark_gray>Upgrade your mine to unlock better blocks!")));
+        meta.lore(Arrays.asList(mm.deserialize(""),
+                                mm.deserialize("<italic:false><dark_gray>You haven't unlocked this block yet"),
+                                mm.deserialize("<italic:false><dark_gray>Upgrade your mine to unlock better blocks!")));
         this.setItemMeta(meta);
     }
 
