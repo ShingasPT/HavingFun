@@ -96,7 +96,7 @@ public class EventsListener implements Listener {
         if(UtilPlayerData.getPlayerFromUUID(event.getPlayer().getUniqueId()) != null){
             event.joinMessage(UtilMessages.getJoinMessage(event.getPlayer()));
         }else{
-            new PlayerData(event.getPlayer().getUniqueId());
+            UtilPlayerData.createNewPlayer(event.getPlayer());
             event.joinMessage(UtilMessages.getNewJoinMessage(event.getPlayer()));
         }
     }

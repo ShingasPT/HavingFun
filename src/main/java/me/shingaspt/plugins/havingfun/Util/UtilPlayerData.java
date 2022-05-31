@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import me.shingaspt.plugins.havingfun.Data.PlayerData;
 import me.shingaspt.plugins.havingfun.HavingFun;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.io.*;
 import java.util.*;
@@ -77,5 +78,9 @@ public class UtilPlayerData {
         }else {
             Bukkit.getLogger().info("No PlayerData has been found! When server stops/restarts PlayerData will be automatically saved!");
         }
+    }
+
+    public static void createNewPlayer(Player p) {
+        players.add(new PlayerData(p.getUniqueId()));
     }
 }
