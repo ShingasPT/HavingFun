@@ -10,6 +10,8 @@ depend: [ Vault ]
 softdepend: [ LuckPerms ]
 commands:
   box:
-    description: 'Opens a Box Gui'
+    description: 'Opens Your Box Gui'
   blocks:
-    description: 'Shows yours/a players unlocked blocks'
+    description: 'Shows yours/a players Unlocked Blocks'
+  fortune:
+    description: 'Opens You Fortune Gui'
