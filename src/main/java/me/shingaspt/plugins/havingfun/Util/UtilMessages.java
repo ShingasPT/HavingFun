@@ -45,4 +45,14 @@ public class UtilMessages {
         return mm.deserialize("<gold>Hope to see you soon <player><gold>! <gray>[<red>-<gray>]", placeholder);
     }
 
+    public static Component getStarterMessage(){
+        return mm.deserialize("<gradient:#D400FF:#B40092>┌───────────────────────────────┐</gradient><newline>" +
+                "<newline>" +
+                "  <gray>Start Your Journey With <gradient:#9F15FF:#E304FF>/box</gradient><newline>" +
+                "  <gray>Check Out All The Blocks You've Achieved With <gradient:#9F15FF:#E304FF>/blocks</gradient><newline>" +
+                "  <gray>Enchant Your Mine With <gradient:#9F15FF:#E304FF>/fortune</gradient><newline>" +
+                "<newline>" +
+                "<gradient:#D400FF:#B40092>└───────────────────────────────┘</gradient>");
+    }
+
 }
