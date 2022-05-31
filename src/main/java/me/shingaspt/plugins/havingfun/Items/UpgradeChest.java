@@ -18,7 +18,7 @@ public class UpgradeChest extends ItemStack {
         this.setAmount(1);
         this.setType(Material.CHEST);
         ItemMeta meta = this.getItemMeta();
-        meta.displayName(mm.deserialize("<gradient:#FF5400:#E0EC00>Upgrade Mine</gradient>"));
+        meta.displayName(mm.deserialize("<italic:false><gradient:#FF5400:#E0EC00>Upgrade Mine</gradient>"));
 
         NBTItem nbt = new NBTItem(this);
         nbt.setString("Upgrades", String.valueOf(upgrades));
@@ -28,9 +28,9 @@ public class UpgradeChest extends ItemStack {
                                                         Placeholder.parsed("price", nbt.getString("UpgradePrice")));
 
         meta.lore(Arrays.asList(mm.deserialize(""),
-                                mm.deserialize("<gray>Use /blocks to find out what blocks you have/can get!"),
-                                mm.deserialize("<gradient:#B500FF:#EC00DC>Upgrades » <upgrade></gradient>", placeholders),
-                                mm.deserialize("<gradient:#B500FF:#EC00DC>Upgrade Price » <price></gradient>", placeholders)));
+                                mm.deserialize("<italic:false><gray>Use /blocks to find out what blocks you have/can get!"),
+                                mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Upgrades » <upgrade></gradient>", placeholders),
+                                mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Upgrade Price » <price></gradient>", placeholders)));
     }
 
 }

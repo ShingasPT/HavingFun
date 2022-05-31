@@ -13,7 +13,7 @@ public class PlaceholderItem extends ItemStack {
         this.setAmount(1);
         this.setType(Material.BEDROCK);
         ItemMeta meta = this.getItemMeta();
-        meta.displayName(mm.deserialize("<dark_gray>Respawning"));
+        meta.displayName(mm.deserialize("<italic:false><dark_gray>Respawning"));
         this.setItemMeta(meta);
     }
 

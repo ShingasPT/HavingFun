@@ -18,14 +18,14 @@ public class Stone extends ItemStack {
         this.setAmount(1);
         this.setType(Material.STONE);
         ItemMeta meta = this.getItemMeta();
-        meta.displayName(mm.deserialize("<gradient:#6A6A6A:#909090>Stone"));
+        meta.displayName(mm.deserialize("<italic:false><gradient:#6A6A6A:#909090>Stone"));
 
         NBTItem nbt = new NBTItem(this);
         nbt.setString("Price", "1");
 
         TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("price", nbt.getString("Price")));
         meta.lore(Arrays.asList(mm.deserialize(""),
-                                mm.deserialize("<gradient:#B500FF:#EC00DC>Reward » <price></gradient>", placeholder)));
+                                mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Reward » <price></gradient>", placeholder)));
         this.setItemMeta(meta);
     }
 

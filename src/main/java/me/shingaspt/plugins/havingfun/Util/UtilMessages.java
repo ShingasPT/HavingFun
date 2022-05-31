@@ -15,29 +15,29 @@ public class UtilMessages {
 
     public static Component getChatFormat(Player p, Component message){
         TagResolver placeholders = TagResolver.resolver(Placeholder.component("player", p.displayName()),
-                                                        Placeholder.component("rank", getPrefix(p)),
+                                                        Placeholder.parsed("rank", getPrefix(p)),
                                                         Placeholder.component("message", message));
         return mm.deserialize("<rank><player> <dark_gray>➔ <gray><message>", placeholders);
     }
 
-    public static Component getPrefix(Player p) {
+    public static String getPrefix(Player p) {
         RegisteredServiceProvider<Chat> rsp = HavingFun.getInstance().getServer().getServicesManager().getRegistration(Chat.class);
         Chat chat = rsp.getProvider();
-        return mm.deserialize(chat.getPlayerPrefix(p));
+        return chat.getPlayerPrefix(p);
     }
 
     public static Component getJoinMessage(Player p) {
         TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        return mm.deserialize("<gold>Welcome Back <player><gold>!", placeholder);
+        return mm.deserialize("<gold>Welcome Back <player><gold>! <gray>[<green>+<gray>]", placeholder);
     }
 
     public static Component getNewJoinMessage(Player p) {
         TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        return mm.deserialize("<gold>Welcome <player> <gold>to the server! Enjoy your stay!", placeholder);
+        return mm.deserialize("<gold>Welcome <player> <gold>to the server! Enjoy your stay! <gray>[<green>+<gray>]", placeholder);
     }
 
     public static Component getLeaveMessage(Player p) {
         TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        return mm.deserialize("<gold>Hope to see you soon <player><gold>!", placeholder);
+        return mm.deserialize("<gold>Hope to see you soon <player><gold>! <gray>[<reed>-<gray>]", placeholder);
     }
 }

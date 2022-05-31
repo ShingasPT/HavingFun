@@ -2,6 +2,7 @@ package me.shingaspt.plugins.havingfun.Util;
 
 import com.google.gson.Gson;
 import me.shingaspt.plugins.havingfun.Data.PlayerData;
+import me.shingaspt.plugins.havingfun.Data.PlayerDataType;
 import me.shingaspt.plugins.havingfun.HavingFun;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class UtilPlayerData {
 
-    private static final Map<UUID, PlayerData> players = new HashMap<>();
+    private static Map<UUID, PlayerData> players = new HashMap<>();
 
     public static int getBalance(UUID uuid){
         return players.get(uuid).getBalance();
@@ -42,20 +43,17 @@ public class UtilPlayerData {
         file.createNewFile();
         Writer writer = new FileWriter(file, false);
         gson.toJson(players, writer);
-        writer.close();
         writer.flush();
+        writer.close();
         Bukkit.getLogger().info("PlayerData has been successfully saved!");
     }
 
     public static void loadPlayerData() throws IOException {
-        Gson gson = new Gson();
         File file = new File(HavingFun.getInstance().getDataFolder().getAbsolutePath() + "/playerData.json");
         if(file.exists()){
+            Gson gson = new Gson();
             Reader reader = new FileReader(file);
-            PlayerData[] temp = gson.fromJson(reader, PlayerData[].class);
-            for(PlayerData player : temp){
-                players.put(player.getUUID(), player);
-            }
+            players = gson.fromJson(reader, new PlayerDataType().getType());
             reader.close();
             Bukkit.getLogger().info("PlayerData has been successfully loaded!");
         }else {
