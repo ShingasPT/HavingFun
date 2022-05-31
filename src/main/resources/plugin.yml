@@ -1,6 +1,6 @@
-name: Havingfun
+name: HavingFun
 version: '${version}'
-main: me.shingaspt.plugins.havingfun.Havingfun
+main: me.shingaspt.plugins.havingfun.HavingFun
 api-version: 1.18
 prefix: HavingFun
 authors: [ ShingasPT ]
