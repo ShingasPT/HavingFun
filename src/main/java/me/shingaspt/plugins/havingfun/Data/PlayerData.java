@@ -14,7 +14,7 @@ public class PlayerData {
     private final UUID uuid;
 
     public PlayerData(UUID uuid){
-        this.balance = 100;
+        this.balance = 0;
         this.upgrades = 0;
         this.upgradePrice = 100;
         this.uuid = uuid;
