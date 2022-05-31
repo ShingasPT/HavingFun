@@ -13,11 +13,11 @@ public class UtilBlocks {
     private static final ArrayList<ItemStack> blocks = new ArrayList<>();
 
     public static ItemStack getRandomBlock(UUID uuid){
-        for(PlayerData player : UtilPlayerData.getPlayers()){
-            if(player.getUUID().equals(uuid)){
+        for(UUID playerUUID : UtilPlayerData.getPlayers().keySet()){
+            if(playerUUID.equals(uuid)){
                 Random rand = new Random();
-                int random = rand.nextInt(player.getPlayerBlocks().size());
-                return player.getPlayerBlocks().get(random);
+                int random = rand.nextInt(UtilPlayerData.getPlayers().get(uuid).getPlayerBlocks().size());
+                return UtilPlayerData.getPlayers().get(uuid).getPlayerBlocks().get(random);
             }
         }
         return new Stone();

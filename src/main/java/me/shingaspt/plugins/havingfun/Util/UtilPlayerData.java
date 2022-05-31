@@ -11,59 +11,39 @@ import java.util.*;
 
 public class UtilPlayerData {
 
-    private static ArrayList<PlayerData> players = new ArrayList<>();
+    private static final Map<UUID, PlayerData> players = new HashMap<>();
 
     public static int getBalance(UUID uuid){
-        for(PlayerData player : players){
-            if(player.getUUID().equals(uuid)){
-                return player.getBalance();
-            }
-        }
-        return 0;
+        return players.get(uuid).getBalance();
     }
 
     public static void setBalance(UUID uuid, int balance){
-        for(PlayerData player : players) {
-            if (player.getUUID().equals(uuid)) {
-                player.setBalance(balance);
-            }
-        }
+        players.get(uuid).setBalance(balance);
     }
 
     public static int getUpgrades(UUID uuid){
-        for(PlayerData player : players) {
-            if (player.getUUID().equals(uuid)) {
-                return player.getUpgrades();
-            }
-        }
-        return 0;
+        return players.get(uuid).getUpgrades();
     }
 
     public static int getUpgradePrice(UUID uuid){
-        for(PlayerData player : players) {
-            if (player.getUUID().equals(uuid)) {
-                return player.getUpgradePrice();
-            }
-        }
-        return 0;
+        return players.get(uuid).getUpgradePrice();
     }
 
-    public static ArrayList<PlayerData> getPlayers() { return players; }
+    public static Map<UUID, PlayerData> getPlayers() { return players; }
 
     public static PlayerData getPlayerFromUUID(UUID uuid){
-        for(PlayerData player : players){
-            if(player.getUUID().equals(uuid)){
-                return player;
-            }
-        }
-        return null;
+        return players.get(uuid);
     }
 
     public static void savePlayerData() throws IOException {
         Gson gson = new Gson();
         File file = new File(HavingFun.getInstance().getDataFolder().getAbsolutePath() + "/playerData.json");
-        Writer writer = new FileWriter(file);
-        gson.toJson(file, writer);
+        file.getParentFile().mkdir();
+        file.createNewFile();
+        Writer writer = new FileWriter(file, false);
+        gson.toJson(players, writer);
+        writer.close();
+        writer.flush();
         Bukkit.getLogger().info("PlayerData has been successfully saved!");
     }
 
@@ -73,7 +53,10 @@ public class UtilPlayerData {
         if(file.exists()){
             Reader reader = new FileReader(file);
             PlayerData[] temp = gson.fromJson(reader, PlayerData[].class);
-            players = new ArrayList<>(Arrays.asList(temp));
+            for(PlayerData player : temp){
+                players.put(player.getUUID(), player);
+            }
+            reader.close();
             Bukkit.getLogger().info("PlayerData has been successfully loaded!");
         }else {
             Bukkit.getLogger().info("No PlayerData has been found! When server stops/restarts PlayerData will be automatically saved!");
@@ -81,6 +64,6 @@ public class UtilPlayerData {
     }
 
     public static void createNewPlayer(Player p) {
-        players.add(new PlayerData(p.getUniqueId()));
+        players.put(p.getUniqueId(), new PlayerData(p.getUniqueId()));
     }
 }

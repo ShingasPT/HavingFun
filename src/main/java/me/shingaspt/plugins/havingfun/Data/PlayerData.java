@@ -16,10 +16,10 @@ public class PlayerData {
     private final ArrayList<ItemStack> playerBlocks;
 
     public PlayerData(UUID uuid){
-        this.uuid = uuid;
         this.balance = 0;
         this.upgrades = 0;
         this.upgradePrice = 100;
+        this.uuid = uuid;
         this.playerBlocks = new ArrayList<>();
         this.playerBlocks.add(new Stone());
     }
@@ -48,11 +48,9 @@ public class PlayerData {
         this.balance = balance;
     }
 
-    public UUID getUUID() {
-        return uuid;
-    }
-
     public ArrayList<ItemStack> getPlayerBlocks() {
         return playerBlocks;
     }
+
+    public UUID getUUID() { return uuid; }
 }

@@ -24,7 +24,9 @@ public class UpgradeChest extends ItemStack {
         nbt.setString("Upgrades", String.valueOf(upgrades));
         nbt.setString("UpgradePrice", String.valueOf(price));
 
-        TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("upgrade", nbt.getString("Upgrade")), Placeholder.parsed("price", nbt.getString("UpgradePrice")));
+        TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("upgrade", nbt.getString("Upgrade")),
+                                                        Placeholder.parsed("price", nbt.getString("UpgradePrice")));
+
         meta.lore(Arrays.asList(mm.deserialize(""),
                                 mm.deserialize("<gray>Use /blocks to find out what blocks you have/can get!"),
                                 mm.deserialize("<gradient:#B500FF:#EC00DC>Upgrades » <upgrade></gradient>", placeholders),
