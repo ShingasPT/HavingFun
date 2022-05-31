@@ -18,6 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class EventsListener implements Listener {
@@ -28,7 +30,9 @@ public class EventsListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event){
         Player p = (Player) event.getWhoClicked();
 
-        if(event.getView().title().contains(mm.deserialize("<bold><gold>Box"))){
+        PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
+
+        if(event.getInventory().equals(UtilGUI.getBoxInventory(p, player.getUpgrades(), player.getUpgradePrice()))){
             event.setCancelled(true);
             if(event.getSlot() == 14){
                 NBTItem nbt = new NBTItem(event.getCurrentItem());
@@ -36,7 +40,6 @@ public class EventsListener implements Listener {
                 int upgradePrice = Integer.parseInt(nbt.getString("UpgradePrice"));
 
                 if((upgrades % 5) == 0){
-                    PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
                     if(player.getPlayerBlocks().size() == UtilBlocks.getAllBlocks().size()){
                         p.sendMessage(mm.deserialize("<red>You've already maxed out your mine... for now."));
                         p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 0);
@@ -78,13 +81,27 @@ public class EventsListener implements Listener {
     @EventHandler
     public void onChat(AsyncChatEvent event){
 
-        event.renderer();
-        ChatRenderer renderer = new ChatRenderer() {
+        event.renderer(new ChatRenderer() {
             @Override
             public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
                 return UtilMessages.getChatFormat(event.getPlayer(), event.message());
             }
-        };
+        });
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event){
+        if(UtilPlayerData.getPlayerFromUUID(event.getPlayer().getUniqueId()) != null){
+            event.joinMessage(UtilMessages.getJoinMessage(event.getPlayer()));
+        }else{
+            new PlayerData(event.getPlayer().getUniqueId());
+            event.joinMessage(UtilMessages.getNewJoinMessage(event.getPlayer()));
+        }
+    }
+
+    @EventHandler
+    public void onLeave(PlayerQuitEvent event){
+        event.quitMessage(UtilMessages.getLeaveMessage(event.getPlayer()));
     }
 
 }

@@ -1,6 +1,7 @@
 package me.shingaspt.plugins.havingfun.Commands;
 
 import me.shingaspt.plugins.havingfun.Util.UtilGUI;
+import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -31,7 +32,7 @@ public class CMDBlocks implements TabExecutor {
         switch(args.length) {
             case 0 -> p.openInventory(UtilGUI.getBlocksInventory(p));
             case 1 -> {
-                if(Bukkit.getOfflinePlayer(args[0]).hasPlayedBefore() != false){
+                if(UtilPlayerData.getPlayerFromUUID(Bukkit.getOfflinePlayerIfCached(args[0]).getUniqueId()) != null){
                     Player player = (Player) Bukkit.getOfflinePlayer(args[0]);
                     p.openInventory(UtilGUI.getBlocksInventory(player));
                 }else{

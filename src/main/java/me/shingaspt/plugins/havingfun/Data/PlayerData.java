@@ -1,8 +1,10 @@
 package me.shingaspt.plugins.havingfun.Data;
 
+import me.shingaspt.plugins.havingfun.Blocks.Stone;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class PlayerData {
@@ -19,6 +21,7 @@ public class PlayerData {
         this.upgrades = 0;
         this.upgradePrice = 100;
         this.playerBlocks = new ArrayList<>();
+        this.playerBlocks.add(new Stone());
     }
 
     public int getUpgrades() {
