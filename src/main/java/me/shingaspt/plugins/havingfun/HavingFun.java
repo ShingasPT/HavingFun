@@ -2,6 +2,7 @@ package me.shingaspt.plugins.havingfun;
 
 import me.shingaspt.plugins.havingfun.Commands.CMDBlocks;
 import me.shingaspt.plugins.havingfun.Commands.CMDBox;
+import me.shingaspt.plugins.havingfun.Commands.CMDFortune;
 import me.shingaspt.plugins.havingfun.Util.UtilBlocks;
 import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
 import org.bukkit.Bukkit;
@@ -18,6 +19,7 @@ public final class HavingFun extends JavaPlugin {
         instance = this;
         getCommand("box").setExecutor(new CMDBox());
         getCommand("blocks").setExecutor(new CMDBlocks());
+        getCommand("fortune").setExecutor(new CMDFortune());
         getServer().getPluginManager().registerEvents(new EventsListener(), this);
         UtilBlocks.loadBlocks();
         try{

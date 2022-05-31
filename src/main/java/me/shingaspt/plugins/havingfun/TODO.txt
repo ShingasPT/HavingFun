@@ -1,7 +1,3 @@
-Better Join/Leave Messages
+Add Cash Boost (More Cash per Click (Temporary))
 
-Add Fortune (More Cash per Click)
-Add Luck (More Blocks per Click)
-Add Boosts (More Cash/Blocks Boosts)
-
-Add New Blocks
+Add Even MORE BLOCKS

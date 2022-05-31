@@ -30,6 +30,14 @@ public class UtilPlayerData {
         return players.get(uuid).getUpgradePrice();
     }
 
+    public static int getPlayerMinedBlocks(UUID uuid) { return players.get(uuid).getMined(); }
+
+    public static void setPlayerMinedBlocks(UUID uuid, int n) { players.get(uuid).setMined(n); }
+
+    public static int getPlayerFortune(UUID uuid) { return players.get(uuid).getFortune(); }
+
+    public static void setPlayerFortune(UUID uuid, int fortune) { players.get(uuid).setFortune(fortune); }
+
     public static Map<UUID, PlayerData> getPlayers() { return players; }
 
     public static PlayerData getPlayerFromUUID(UUID uuid){

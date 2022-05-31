@@ -6,6 +6,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.milkbowl.vault.chat.Chat;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -27,13 +28,16 @@ public class UtilMessages {
     }
 
     public static Component getJoinMessage(Player p) {
-        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        return mm.deserialize("<gold>Welcome Back <player><gold>! <gray>[<green>+<gray>]", placeholder);
+        TagResolver placeholders = TagResolver.resolver(Placeholder.component("player", p.displayName()),
+                                                        Placeholder.parsed("rank", getPrefix(p)));
+        return mm.deserialize("<purple>Welcome Back <rank><player> <dark_gray>| <gray>[<green>+<gray>]", placeholders);
     }
 
     public static Component getNewJoinMessage(Player p) {
-        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        return mm.deserialize("<gold>Welcome <player> <gold>to the server! Enjoy your stay! <gray>[<green>+<gray>]", placeholder);
+        TagResolver placeholders = TagResolver.resolver(Placeholder.component("player", p.displayName()),
+                                                        Placeholder.parsed("rank", getPrefix(p)),
+                                                        Placeholder.parsed("unique", String.valueOf(Bukkit.getOfflinePlayers().length)));
+        return mm.deserialize("<purple>Welcome <rank><player> <purple>to the server! <dark_gray>| <purple>#<pink><unique>", placeholders);
     }
 
     public static Component getLeaveMessage(Player p) {
