@@ -44,7 +44,7 @@ public class EventsListener implements Listener {
 
                 if((upgrades + 1) == UtilBlocks.getAllBlocks().size()){
                     p.sendMessage(mm.deserialize("<red>You already maxed out your mine... for now!"));
-                    p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 0);
+                    p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 1);
                 }else{
                     if(player.getBalance() >= upgradePrice){
                         p.sendMessage(mm.deserialize("<green>Successfully upgraded your mine! A new block has been added to your mine!"));
@@ -56,12 +56,12 @@ public class EventsListener implements Listener {
                         event.getInventory().setItem(0, UtilGUI.getPlayerSkull(p));
                     }else{
                         p.sendMessage(mm.deserialize("<red>Insufficient balance to do this purchase!"));
-                        p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 0);
+                        p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 1);
                     }
                 }
 
-            }else if(UtilGUI.getMineSlots().contains(event.getSlot())){
-                if(UtilBlocks.getAllBlocks().contains(event.getCurrentItem())){
+            }else if(UtilBlocks.getMineSlots().contains(event.getSlot())){
+                if(!(event.getCurrentItem().isSimilar(new PlaceholderItem()))){
                     PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
 
                     PersistentDataContainer container = event.getCurrentItem().getItemMeta().getPersistentDataContainer();
@@ -74,7 +74,10 @@ public class EventsListener implements Listener {
 
                     event.getInventory().setItem(0, UtilGUI.getPlayerSkull(p));
                     event.getInventory().setItem(event.getSlot(), new PlaceholderItem());
-                    Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId())), 120);
+                    Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {
+                        event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId()));
+                        p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                    }, 120);
                 }
             }
         }else if(event.getView().title().equals(UtilGUI.getBlocksTitle())){
@@ -86,7 +89,6 @@ public class EventsListener implements Listener {
 
                 PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
 
-                int fortune = player.getFortune();
                 int fortunePrice = player.getFortunePrice();
 
                 if(player.getBalance() >= fortunePrice){
@@ -100,7 +102,7 @@ public class EventsListener implements Listener {
                     event.getInventory().setItem(event.getSlot(), new FortuneBook(player.getFortune(), player.getFortunePrice()));
                 }else{
                     p.sendMessage(mm.deserialize("<red>Insufficient balance to do this purchase!"));
-                    p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 0);
+                    p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 1);
                 }
             }
         }

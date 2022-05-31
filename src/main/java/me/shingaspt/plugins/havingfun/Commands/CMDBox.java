@@ -1,12 +1,10 @@
 package me.shingaspt.plugins.havingfun.Commands;
 
 import me.shingaspt.plugins.havingfun.Util.UtilGUI;
-import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 
 public class CMDBox implements CommandExecutor {

@@ -17,19 +17,16 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UtilGUI {
 
     private static final MiniMessage mm = MiniMessage.miniMessage();
-    private static final ArrayList<Integer> mineSlots = new ArrayList<>(Arrays.asList(11,12,13,14,15,20,21,22,23,24,29,30,31,32,33,38,39,40,41,42));
-
     public static Inventory getBoxInventory(Player p) {
 
         Inventory temp = Bukkit.createInventory(null, 54, getBoxTitle());
 
-        for(int slot: mineSlots){
+        for(int slot: UtilBlocks.getMineSlots()){
             temp.setItem(slot, UtilBlocks.getRandomBlock(p.getUniqueId()));
         }
 
@@ -76,10 +73,6 @@ public class UtilGUI {
                 inv.setItem(i, item);
             }
         }
-    }
-
-    public static ArrayList<Integer> getMineSlots(){
-        return mineSlots;
     }
 
     public static ItemStack getPlayerSkull(Player p){

@@ -5,18 +5,21 @@ import me.shingaspt.plugins.havingfun.Data.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.UUID;
 
 public class UtilBlocks {
 
     private static final ArrayList<ItemStack> blocks = new ArrayList<>();
-
+    private static final ArrayList<Integer> mineSlots = new ArrayList<>(Arrays.asList(11,12,13,14,15,20,21,22,23,24,29,30,31,32,33,38,39,40,41,42));
     public static ItemStack getRandomBlock(UUID uuid){
         PlayerData player = UtilPlayerData.getPlayerFromUUID(uuid);
         if(player.getUpgrades() != 0){
             Random rand = new Random();
             int random = rand.nextInt(player.getUpgrades() + 1);
-            return UtilBlocks.getAllBlocks().get(random);
+            return blocks.get(random);
         }
         return new Cobblestone();
     }
@@ -34,4 +37,6 @@ public class UtilBlocks {
     }
 
     public static ArrayList<ItemStack> getAllBlocks() { return blocks; }
+
+    public static ArrayList<Integer> getMineSlots() { return mineSlots; }
 }
