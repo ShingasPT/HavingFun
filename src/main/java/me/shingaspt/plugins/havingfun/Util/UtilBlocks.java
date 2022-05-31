@@ -16,7 +16,7 @@ public class UtilBlocks {
         PlayerData player = UtilPlayerData.getPlayerFromUUID(uuid);
         if(player.getUpgrades() != 0){
             Random rand = new Random();
-            int random = rand.nextInt(player.getUpgrades());
+            int random = rand.nextInt(player.getUpgrades() + 1);
             return UtilBlocks.getAllBlocks().get(random);
         }
         return new Cobblestone();

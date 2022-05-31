@@ -21,7 +21,7 @@ import java.util.Arrays;
 public class UtilGUI {
 
     private static final MiniMessage mm = MiniMessage.miniMessage();
-    private static final ArrayList<Integer> mineSlots = new ArrayList<>(Arrays.asList(20,21,22,23,24,29,30,31,32,33,38,39,40,41,42));
+    private static final ArrayList<Integer> mineSlots = new ArrayList<>(Arrays.asList(11,12,13,14,15,20,21,22,23,24,29,30,31,32,33,38,39,40,41,42));
 
     public static Inventory getBoxInventory(Player p, int upgrades, int price) {
 
@@ -31,8 +31,8 @@ public class UtilGUI {
             temp.setItem(slot, UtilBlocks.getRandomBlock(p.getUniqueId()));
         }
 
-        temp.setItem(12, getPlayerSkull(p));
-        temp.setItem(14, new UpgradeChest(upgrades, price));
+        temp.setItem(0, getPlayerSkull(p));
+        temp.setItem(8, new UpgradeChest(upgrades, price));
 
         fillInv(temp, new InvFrame());
 
@@ -76,7 +76,7 @@ public class UtilGUI {
 
         skullMeta.setOwningPlayer(p);
 
-        skullMeta.displayName(p.displayName());
+        skullMeta.displayName(UtilMessages.getPlayerDisplayName(p));
         skull.setItemMeta(skullMeta);
 
         return skull;

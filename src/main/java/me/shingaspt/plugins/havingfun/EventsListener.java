@@ -60,16 +60,15 @@ public class EventsListener implements Listener {
             }else if(UtilGUI.getMineSlots().contains(event.getSlot())){
                 if(!(event.getCurrentItem().isSimilar(new PlaceholderItem()))){
                     PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
-                    int reward = Integer.parseInt(NBTItem.convertItemtoNBT(event.getCurrentItem()).getString("Reward"));
+                    int reward = Integer.parseInt(new NBTItem(event.getCurrentItem()).getString("Reward"));
                     player.setBalance(player.getBalance() + reward);
-                    p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 0);
                     event.getInventory().setItem(12, UtilGUI.getPlayerSkull(p));
                     event.getInventory().setItem(event.getSlot(), new PlaceholderItem());
-                    Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId())), 60);
+                    Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId())), 120);
                 }
             }
         }else if(event.getView().title().equals(UtilGUI.getBlocksTitle(p))){
-            p.sendMessage(NBTItem.convertItemtoNBT(event.getCurrentItem()).getString("Reward"));
+            p.sendMessage(new NBTItem(event.getCurrentItem()).getString("Reward"));
             event.setCancelled(true);
         }
     }

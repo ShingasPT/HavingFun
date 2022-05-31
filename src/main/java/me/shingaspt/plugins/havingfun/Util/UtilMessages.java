@@ -40,4 +40,9 @@ public class UtilMessages {
         TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
         return mm.deserialize("<gold>Hope to see you soon <player><gold>! <gray>[<red>-<gray>]", placeholder);
     }
+
+    public static Component getPlayerDisplayName(Player p) {
+        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
+        return mm.deserialize("<italic:false><player>",placeholder);
+    }
 }
