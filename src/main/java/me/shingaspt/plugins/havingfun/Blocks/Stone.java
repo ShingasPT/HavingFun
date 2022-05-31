@@ -27,7 +27,7 @@ public class Stone extends ItemStack {
 
         TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("reward", nbt.getString("Reward")));
         meta.lore(Arrays.asList(mm.deserialize(""),
-                mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Reward » <reward></gradient>", placeholder)));
+                mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Reward ➤ <reward></gradient>", placeholder)));
 
         this.setItemMeta(meta);
     }

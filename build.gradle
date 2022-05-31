@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'me.shingaspt.plugins'
-version = '2.3'
+version = '2.4'
 
 repositories {
     mavenCentral()
@@ -41,6 +41,7 @@ java {
 }
 
 tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release = targetJavaVersion
     }

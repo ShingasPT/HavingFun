@@ -17,7 +17,7 @@ public class UtilMessages {
         TagResolver placeholders = TagResolver.resolver(Placeholder.component("player", p.displayName()),
                                                         Placeholder.parsed("rank", getPrefix(p)),
                                                         Placeholder.component("message", message));
-        return mm.deserialize("<rank><player> <dark_gray>➔ <gray><message>", placeholders);
+        return mm.deserialize("<rank><player> <dark_gray>➥ <gray><message>", placeholders);
     }
 
     public static String getPrefix(Player p) {

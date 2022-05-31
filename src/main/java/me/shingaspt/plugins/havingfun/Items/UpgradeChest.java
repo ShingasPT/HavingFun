@@ -25,8 +25,8 @@ public class UpgradeChest extends ItemStack {
         meta.lore(Arrays.asList(mm.deserialize(""),
                                 mm.deserialize("<italic:false><gray>Use /blocks to see the blocks you have!"),
                                 mm.deserialize(""),
-                                mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Upgrades » <upgrade></gradient>", placeholders),
-                                mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Upgrade Price » <price></gradient>", placeholders)));
+                                mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Upgrades ➤ <upgrade></gradient>", placeholders),
+                                mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Upgrade Price ➤ <price></gradient>", placeholders)));
         this.setItemMeta(meta);
     }
 

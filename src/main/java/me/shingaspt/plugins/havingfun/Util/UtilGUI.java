@@ -83,12 +83,12 @@ public class UtilGUI {
     }
     public static Component getBlocksTitle(Player p){
         TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        return mm.deserialize("<player> <bold><gold>Blocks", placeholder);
+        return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Player Box</gradient>", placeholder);
     }
 
     public static Component getBoxTitle(Player p) {
         TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        return mm.deserialize("<player> <bold><gold>Box", placeholder);
+        return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Blocks</gradient>", placeholder);
     }
 
     public static Component getPlayerDisplayName(Player p) {

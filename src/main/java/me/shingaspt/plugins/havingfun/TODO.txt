@@ -1,5 +1,4 @@
 Better Join/Leave Messages
-Change Box/Blocks GUI Titles (Remove Player's Name)
 
 Add Fortune (More Cash per Click)
 Add Luck (More Blocks per Click)
