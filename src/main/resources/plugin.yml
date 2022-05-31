@@ -6,7 +6,8 @@ prefix: HavingFun
 authors: [ ShingasPT ]
 description: Quick Plugin to Have Fun!
 website: https://github.com/ShingasPT/HavingFun
-depend: [ NBTAPI ]
+depend: [ NBTAPI, Vault ]
+softdepend: [ LuckPerms ]
 commands:
   box:
     description: 'Opens a Box Gui'

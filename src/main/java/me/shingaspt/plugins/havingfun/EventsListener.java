@@ -1,11 +1,16 @@
 package me.shingaspt.plugins.havingfun;
 
 import de.tr7zw.nbtapi.NBTItem;
+import io.papermc.paper.chat.ChatRenderer;
+import io.papermc.paper.event.player.AsyncChatEvent;
 import me.shingaspt.plugins.havingfun.Data.PlayerData;
-import me.shingaspt.plugins.havingfun.Items.Placeholder;
+import me.shingaspt.plugins.havingfun.Items.PlaceholderItem;
 import me.shingaspt.plugins.havingfun.Util.UtilBlocks;
 import me.shingaspt.plugins.havingfun.Util.UtilGUI;
+import me.shingaspt.plugins.havingfun.Util.UtilMessages;
 import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -13,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class EventsListener implements Listener {
 
@@ -59,14 +65,26 @@ public class EventsListener implements Listener {
             }
 
             if(UtilGUI.getMineSlots().contains(event.getSlot())) {
-                if (!(event.getCurrentItem().isSimilar(new Placeholder()))) {
+                if (!(event.getCurrentItem().isSimilar(new PlaceholderItem()))) {
                     NBTItem nbt = new NBTItem(event.getCurrentItem());
                     UtilPlayerData.setBalance(p.getUniqueId(), (UtilPlayerData.getBalance(p.getUniqueId()) + Integer.parseInt(nbt.getString("Price"))));
-                    event.getInventory().setItem(event.getSlot(), new Placeholder());
+                    event.getInventory().setItem(event.getSlot(), new PlaceholderItem());
                     Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId())), 60);
                 }
             }
         }
+    }
+
+    @EventHandler
+    public void onChat(AsyncChatEvent event){
+
+        event.renderer();
+        ChatRenderer renderer = new ChatRenderer() {
+            @Override
+            public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
+                return UtilMessages.getChatFormat(event.getPlayer(), event.message());
+            }
+        };
     }
 
 }
