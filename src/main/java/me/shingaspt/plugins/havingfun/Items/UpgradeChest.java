@@ -18,7 +18,7 @@ public class UpgradeChest extends ItemStack {
         this.setAmount(1);
         this.setType(Material.CHEST);
         ItemMeta meta = this.getItemMeta();
-        meta.displayName(mm.deserialize("<gradient:#FF5400:#EC7800:#E0EC00>Upgrade Mine</gradient>"));
+        meta.displayName(mm.deserialize("<gradient:#FF5400:#E0EC00>Upgrade Mine</gradient>"));
 
         NBTItem nbt = new NBTItem(this);
         nbt.setString("Upgrades", String.valueOf(upgrades));

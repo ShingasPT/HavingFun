@@ -75,6 +75,8 @@ public class EventsListener implements Listener {
                     Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId())), 60);
                 }
             }
+        }else if(event.getInventory().equals(UtilGUI.getBlocksInventory(p))){
+            event.setCancelled(true);
         }
     }
 
