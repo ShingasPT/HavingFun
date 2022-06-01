@@ -26,7 +26,7 @@ public class DiamondOre extends ItemStack {
 
         PersistentDataContainer container = meta.getPersistentDataContainer();
         NamespacedKey key = new NamespacedKey(HavingFun.getInstance(), "Reward");
-        container.set(key, PersistentDataType.INTEGER, 7);
+        container.set(key, PersistentDataType.INTEGER, 10);
 
         TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("reward", String.valueOf(container.get(key, PersistentDataType.INTEGER))));
         meta.lore(Arrays.asList(mm.deserialize(""),
