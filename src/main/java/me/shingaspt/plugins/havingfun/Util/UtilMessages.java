@@ -23,6 +23,7 @@ public class UtilMessages {
 
     public static String getPrefix(Player p) {
         RegisteredServiceProvider<Chat> rsp = HavingFun.getInstance().getServer().getServicesManager().getRegistration(Chat.class);
+        assert rsp != null;
         Chat chat = rsp.getProvider();
         return chat.getPlayerPrefix(p);
     }
@@ -30,7 +31,7 @@ public class UtilMessages {
     public static Component getJoinMessage(Player p) {
         TagResolver placeholders = TagResolver.resolver(Placeholder.component("player", p.displayName()),
                                                         Placeholder.parsed("rank", getPrefix(p)));
-        return mm.deserialize("<dark_purple>Welcome Back <rank><player> <gray>[<green>+<gray>]", placeholders);
+        return mm.deserialize("<dark_purple>Welcome Back <rank><light_purple><player> <gray>[<green>+<gray>]", placeholders);
     }
 
     public static Component getNewJoinMessage(Player p) {
