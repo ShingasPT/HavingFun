@@ -18,7 +18,7 @@ public class FortuneBook extends ItemStack {
         ItemMeta meta = this.getItemMeta();
 
         MiniMessage mm = MiniMessage.miniMessage();
-        meta.displayName(mm.deserialize("<italic:false><gradient:#8700BE:#C600B8>Upgrade Fortune</gradient>"));
+        meta.displayName(mm.deserialize("<italic:false><light_purple>Upgrade Fortune"));
 
         TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("fortune", String.valueOf(fortune)),
                                                         Placeholder.parsed("price", String.valueOf(fortunePrice)));

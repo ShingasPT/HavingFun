@@ -72,7 +72,8 @@ public class UtilGUI {
 
         TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("balance", String.valueOf(UtilPlayerData.getBalance(p.getUniqueId()))),
                                                         Placeholder.parsed("blocks", String.valueOf(UtilPlayerData.getPlayerMinedBlocks(p.getUniqueId()))),
-                                                        Placeholder.parsed("fortune", String.valueOf(UtilPlayerData.getPlayerFortune(p.getUniqueId()))));
+                                                        Placeholder.parsed("fortune", String.valueOf(UtilPlayerData.getPlayerFortune(p.getUniqueId()))),
+                                                        Placeholder.component("player", getPlayerDisplayName(p)));
 
         skullMeta.lore(Arrays.asList(mm.deserialize(""),
                                      mm.deserialize("<italic:false><gradient:#A600FF:#D200EC>Balance » <balance></gradient>",placeholders),
@@ -81,17 +82,17 @@ public class UtilGUI {
 
         skullMeta.setOwningPlayer(p);
 
-        skullMeta.displayName(getPlayerDisplayName(p));
+        skullMeta.displayName(mm.deserialize("<light_purple><player>",placeholders));
         skull.setItemMeta(skullMeta);
 
         return skull;
     }
     public static Component getBlocksTitle(){
-        return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Player Blocks</gradient>");
+        return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Blocks</gradient>");
     }
 
     public static Component getBoxTitle() {
-        return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Player Box</gradient>");
+        return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Mine</gradient>");
     }
 
     public static Component getPlayerDisplayName(Player p) {

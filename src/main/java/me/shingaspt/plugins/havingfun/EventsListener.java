@@ -144,7 +144,7 @@ public class EventsListener implements Listener {
         Player p = event.getPlayer();
         ItemStack item = event.getItem();
         assert item != null;
-        PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
+        PersistentDataContainer container = Objects.requireNonNull(item.getItemMeta().getPersistentDataContainer());
         NamespacedKey boost = new NamespacedKey(HavingFun.getInstance(), "boost");
         NamespacedKey time = new NamespacedKey(HavingFun.getInstance(), "time");
         if(container.has(boost)){
