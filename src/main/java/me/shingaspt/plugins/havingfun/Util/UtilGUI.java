@@ -24,11 +24,12 @@ public class UtilGUI {
 
         Inventory temp = Bukkit.createInventory(null, 54, getBoxTitle());
 
+        int delay = 1;
+
         for(int slot: UtilBlocks.getMineSlots()){
             temp.setItem(slot, new PlaceholderItem());
-            Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {
-                temp.setItem(slot, UtilBlocks.getRandomBlock(p.getUniqueId()));
-            }, 20);
+            Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> temp.setItem(slot, UtilBlocks.getRandomBlock(p.getUniqueId())), 20L * delay);
+            delay++;
         }
 
         PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
