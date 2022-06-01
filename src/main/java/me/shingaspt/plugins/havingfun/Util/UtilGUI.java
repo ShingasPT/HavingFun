@@ -10,7 +10,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -24,12 +23,12 @@ public class UtilGUI {
 
         Inventory temp = Bukkit.createInventory(null, 54, getBoxTitle());
 
-        int delay = 5;
+        float delay = 3;
 
         for(int slot: UtilBlocks.getMineSlots()){
             temp.setItem(slot, new PlaceholderItem());
-            Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> temp.setItem(slot, UtilBlocks.getRandomBlock(p.getUniqueId())), 20L * delay);
-            delay++;
+            Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> temp.setItem(slot, UtilBlocks.getRandomBlock(p.getUniqueId())), Math.round(20 * delay));
+            delay += 0.5;
         }
 
         PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
