@@ -24,7 +24,7 @@ public class UtilGUI {
 
         Inventory temp = Bukkit.createInventory(null, 54, getBoxTitle());
 
-        int delay = 1;
+        int delay = 5;
 
         for(int slot: UtilBlocks.getMineSlots()){
             temp.setItem(slot, new PlaceholderItem());
