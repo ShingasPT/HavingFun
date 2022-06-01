@@ -24,6 +24,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
@@ -83,7 +84,7 @@ public class EventsListener implements Listener {
 
                     Random rand = new Random();
 
-                    int chance = rand.nextInt(100) + 1;
+                    int chance = rand.nextInt(10000) + 1;
                     if(Arrays.asList(1,2,3,4,5).contains(chance)){
                         int tempBoost = rand.nextInt(5) + 1;
                         int tempTime = rand.nextInt(15) + 1;
@@ -158,14 +159,15 @@ public class EventsListener implements Listener {
     @EventHandler
     public void onRightClick(PlayerInteractEvent event){
         Player p = event.getPlayer();
-        PersistentDataContainer container = p.getActiveItem().getItemMeta().getPersistentDataContainer();
+        ItemStack item = event.getItem();
+        PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
         NamespacedKey boost = new NamespacedKey(HavingFun.getInstance(), "boost");
         NamespacedKey time = new NamespacedKey(HavingFun.getInstance(), "time");
         if(container.has(boost)){
             if(boosts.containsKey(p.getUniqueId())){
                 p.sendMessage(mm.deserialize("<red>You have an already going boost! Wait until it ends."));
             }else{
-                p.getInventory().remove(p.getActiveItem());
+                p.getInventory().remove(item);
                 boosts.put(p.getUniqueId(), container.get(boost, PersistentDataType.INTEGER));
                 p.sendMessage(mm.deserialize("<green>Your cash boost has been activated!"));
                 Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {

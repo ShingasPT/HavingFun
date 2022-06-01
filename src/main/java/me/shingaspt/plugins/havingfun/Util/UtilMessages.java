@@ -37,24 +37,24 @@ public class UtilMessages {
         TagResolver placeholders = TagResolver.resolver(Placeholder.component("player", p.displayName()),
                                                         Placeholder.parsed("rank", getPrefix(p)),
                                                         Placeholder.parsed("unique", String.valueOf(Bukkit.getOfflinePlayers().length)));
-        return mm.deserialize("<dark_purple>Welcome <rank><player> <purple>to the server! <dark_purple>#<light_purple><unique>", placeholders);
+        return mm.deserialize("<dark_purple>Welcome <rank><light_purple><player> <dark_purple>to the server! <gray>#<green><unique>", placeholders);
     }
 
     public static Component getLeaveMessage(Player p) {
         TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        return mm.deserialize("<dark_purple>Hope to see you soon <player> <gray>[<red>-<gray>]", placeholder);
+        return mm.deserialize("<dark_purple>Hope to see you soon <light_purple><player> <gray>[<red>-<gray>]", placeholder);
     }
 
     public static Component getStarterMessage(){
         return mm.deserialize("<newline>" +
-                "<gradient:#D400FF:#B40092:#9F15FF>╔════════════════════════╗</gradient><newline>" +
+                "<gradient:#D400FF:#B40092:#9F15FF>╔════════════════════════════════╗</gradient><newline>" +
                 "<newline>" +
                 "  <gray>Start Your Journey With <gradient:#9F15FF:#E304FF>/box</gradient><newline>" +
                 "  <gray>Check Out All The Blocks You've Achieved With <gradient:#9F15FF:#E304FF>/blocks</gradient><newline>" +
                 "  <gray>Enchant Your Mine With <gradient:#9F15FF:#E304FF>/fortune</gradient><newline>" +
-                "  <gray>If you're lucky enough you'll find a <green>Cash Boost <gray>while mining!" +
+                "  <gray>You have a low chance of getting a <green>Cash Boost <gray>while mining!" +
                 "<newline>" +
-                "<gradient:#D400FF:#B40092>╚════════════════════════╝</gradient>" +
+                "<gradient:#D400FF:#B40092>╚════════════════════════════════╝</gradient>" +
                 "<newline>");
     }
 

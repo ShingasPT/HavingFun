@@ -35,6 +35,8 @@ public class CashBoost extends ItemStack {
         meta.displayName(mm.deserialize("<green>Cash Boost +<boost>",placeholders));
         meta.lore(Arrays.asList(mm.deserialize(""),
                                 mm.deserialize("<italic:false><gradient:#B500FF:#EC00DC>Boost Time ➤ <time>m",placeholders)));
+
+        this.setItemMeta(meta);
     }
 
 }
