@@ -97,7 +97,6 @@ public class EventsListener implements Listener {
                     event.getInventory().setItem(event.getSlot(), new PlaceholderItem());
                     Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {
                         event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId()));
-                        p.playSound(p, Sound.UI_TOAST_IN, 2, 1);
                     }, 120);
                 }
             }

@@ -1,10 +1,8 @@
 package me.shingaspt.plugins.havingfun.Util;
 
 import me.shingaspt.plugins.havingfun.Data.PlayerData;
-import me.shingaspt.plugins.havingfun.Items.FortuneBook;
-import me.shingaspt.plugins.havingfun.Items.InvFrame;
-import me.shingaspt.plugins.havingfun.Items.LockedItem;
-import me.shingaspt.plugins.havingfun.Items.UpgradeChest;
+import me.shingaspt.plugins.havingfun.HavingFun;
+import me.shingaspt.plugins.havingfun.Items.*;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -27,7 +25,10 @@ public class UtilGUI {
         Inventory temp = Bukkit.createInventory(null, 54, getBoxTitle());
 
         for(int slot: UtilBlocks.getMineSlots()){
-            temp.setItem(slot, UtilBlocks.getRandomBlock(p.getUniqueId()));
+            temp.setItem(slot, new PlaceholderItem());
+            Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {
+                temp.setItem(slot, UtilBlocks.getRandomBlock(p.getUniqueId()));
+            }, 20);
         }
 
         PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
