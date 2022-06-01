@@ -11,13 +11,12 @@ import java.util.Arrays;
 
 public class UpgradeChest extends ItemStack {
 
-    private static final MiniMessage mm = MiniMessage.miniMessage();
-
     public UpgradeChest(int upgrades, int price){
         this.setAmount(1);
         this.setType(Material.CHEST);
 
         ItemMeta meta = this.getItemMeta();
+        MiniMessage mm = MiniMessage.miniMessage();
         meta.displayName(mm.deserialize("<italic:false><gradient:#8700BE:#C600B8>Upgrade Mine</gradient>"));
         TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("upgrade", String.valueOf(upgrades)),
                                                         Placeholder.parsed("price", String.valueOf(price)));

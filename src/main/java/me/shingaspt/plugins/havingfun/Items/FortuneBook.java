@@ -11,14 +11,13 @@ import java.util.Arrays;
 
 public class FortuneBook extends ItemStack {
 
-    private static final MiniMessage mm = MiniMessage.miniMessage();
-
     public FortuneBook(int fortune, int fortunePrice) {
         this.setAmount(1);
         this.setType(Material.ENCHANTED_BOOK);
 
         ItemMeta meta = this.getItemMeta();
 
+        MiniMessage mm = MiniMessage.miniMessage();
         meta.displayName(mm.deserialize("<italic:false><gradient:#8700BE:#C600B8>Upgrade Fortune</gradient>"));
 
         TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("fortune", String.valueOf(fortune)),

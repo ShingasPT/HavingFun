@@ -3,6 +3,7 @@ package me.shingaspt.plugins.havingfun;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import me.shingaspt.plugins.havingfun.Data.PlayerData;
+import me.shingaspt.plugins.havingfun.Items.CashBoost;
 import me.shingaspt.plugins.havingfun.Items.FortuneBook;
 import me.shingaspt.plugins.havingfun.Items.PlaceholderItem;
 import me.shingaspt.plugins.havingfun.Items.UpgradeChest;
@@ -20,15 +21,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.UUID;
+
 public class EventsListener implements Listener {
 
     private final MiniMessage mm = MiniMessage.miniMessage();
+    private static HashMap<UUID, Integer> boosts = new HashMap<>();
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event){
@@ -68,15 +76,27 @@ public class EventsListener implements Listener {
                     NamespacedKey key = new NamespacedKey(HavingFun.getInstance(), "Reward");
 
                     int reward = container.get(key, PersistentDataType.INTEGER);
+                    int boost = boosts.get(p.getUniqueId()) != null ? boosts.get(p.getUniqueId()) : 0;
 
-                    player.setBalance(player.getBalance() + reward + player.getFortune());
+                    player.setBalance(player.getBalance() + reward + player.getFortune() + boost);
                     player.setMined(player.getMined() + 1);
+
+                    Random rand = new Random();
+
+                    int chance = rand.nextInt(100) + 1;
+                    if(Arrays.asList(1,2,3,4,5).contains(chance)){
+                        int tempBoost = rand.nextInt(5) + 1;
+                        int tempTime = rand.nextInt(15) + 1;
+                        p.getInventory().addItem(new CashBoost(tempBoost, tempTime));
+                        p.sendMessage(mm.deserialize("<green>You obtained a cash boost!"));
+                        p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                    }
 
                     event.getInventory().setItem(0, UtilGUI.getPlayerSkull(p));
                     event.getInventory().setItem(event.getSlot(), new PlaceholderItem());
                     Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {
                         event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId()));
-                        p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                        p.playSound(p, Sound.UI_TOAST_IN, 2, 1);
                     }, 120);
                 }
             }
@@ -133,6 +153,27 @@ public class EventsListener implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent event){
         event.quitMessage(UtilMessages.getLeaveMessage(event.getPlayer()));
+    }
+
+    @EventHandler
+    public void onRightClick(PlayerInteractEvent event){
+        Player p = event.getPlayer();
+        PersistentDataContainer container = p.getActiveItem().getItemMeta().getPersistentDataContainer();
+        NamespacedKey boost = new NamespacedKey(HavingFun.getInstance(), "boost");
+        NamespacedKey time = new NamespacedKey(HavingFun.getInstance(), "time");
+        if(container.has(boost)){
+            if(boosts.containsKey(p.getUniqueId())){
+                p.sendMessage(mm.deserialize("<red>You have an already going boost! Wait until it ends."));
+            }else{
+                p.getInventory().remove(p.getActiveItem());
+                boosts.put(p.getUniqueId(), container.get(boost, PersistentDataType.INTEGER));
+                p.sendMessage(mm.deserialize("<green>Your cash boost has been activated!"));
+                Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {
+                    boosts.remove(p.getUniqueId());
+                    p.sendMessage(mm.deserialize("<red>Your cash boost has finished!"));
+                }, ((container.get(time, PersistentDataType.INTEGER)) * 60) * 20);
+            }
+        }
     }
 
 }

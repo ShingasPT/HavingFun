@@ -52,6 +52,7 @@ public class UtilMessages {
                 "  <gray>Start Your Journey With <gradient:#9F15FF:#E304FF>/box</gradient><newline>" +
                 "  <gray>Check Out All The Blocks You've Achieved With <gradient:#9F15FF:#E304FF>/blocks</gradient><newline>" +
                 "  <gray>Enchant Your Mine With <gradient:#9F15FF:#E304FF>/fortune</gradient><newline>" +
+                "  <gray>If you're lucky enough you'll find a <green>Cash Boost <gray>while mining!" +
                 "<newline>" +
                 "<gradient:#D400FF:#B40092>╚════════════════════════╝</gradient>" +
                 "<newline>");
