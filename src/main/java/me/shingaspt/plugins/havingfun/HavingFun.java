@@ -1,7 +1,7 @@
 package me.shingaspt.plugins.havingfun;
 
 import me.shingaspt.plugins.havingfun.Commands.CMDBlocks;
-import me.shingaspt.plugins.havingfun.Commands.CMDBox;
+import me.shingaspt.plugins.havingfun.Commands.CMDMine;
 import me.shingaspt.plugins.havingfun.Util.UtilBlocks;
 import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
 import org.bukkit.Bukkit;
@@ -17,7 +17,7 @@ public final class HavingFun extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        Objects.requireNonNull(getCommand("box")).setExecutor(new CMDBox());
+        Objects.requireNonNull(getCommand("mine")).setExecutor(new CMDMine());
         Objects.requireNonNull(getCommand("blocks")).setExecutor(new CMDBlocks());
         getServer().getPluginManager().registerEvents(new EventsListener(), this);
         UtilBlocks.loadBlocks();

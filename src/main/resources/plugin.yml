@@ -9,9 +9,7 @@ website: https://github.com/ShingasPT/HavingFun
 depend: [ Vault ]
 softdepend: [ LuckPerms ]
 commands:
-  box:
-    description: 'Opens Your Box Gui'
+  mine:
+    description: 'Opens Your Mine Gui'
   blocks:
     description: 'Shows yours/a players Unlocked Blocks'
-  fortune:
-    description: 'Opens You Fortune Gui'
