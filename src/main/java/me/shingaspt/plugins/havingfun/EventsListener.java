@@ -44,11 +44,11 @@ public class EventsListener implements Listener {
                 int upgrades = player.getUpgrades();
                 int upgradePrice = player.getUpgradePrice();
 
-                if((upgrades + 1) == UtilBlocks.getAllBlocks().size()){
+                if ((upgrades + 1) == UtilBlocks.getAllBlocks().size()) {
                     p.sendMessage(mm.deserialize("<red>You already maxed out your mine... for now!"));
                     p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 1);
-                }else{
-                    if(player.getBalance() >= upgradePrice){
+                } else {
+                    if (player.getBalance() >= upgradePrice) {
                         p.sendMessage(mm.deserialize("<green>Successfully upgraded your mine! A new block has been added to your mine!"));
                         player.setBalance(player.getBalance() - upgradePrice);
                         player.setUpgrades(player.getUpgrades() + 1);
@@ -56,10 +56,31 @@ public class EventsListener implements Listener {
                         p.playSound(p, Sound.ENTITY_PLAYER_LEVELUP, 1, 0);
                         event.getInventory().setItem(8, new UpgradeChest(player.getUpgrades(), player.getUpgradePrice()));
                         event.getInventory().setItem(0, UtilGUI.getPlayerSkull(p));
-                    }else{
+                    } else {
                         p.sendMessage(mm.deserialize("<red>Insufficient balance to do this purchase!"));
                         p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 1);
                     }
+                }
+
+            }else if (event.getSlot() == 45){
+                event.setCancelled(true);
+
+                PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
+
+                int fortunePrice = player.getFortunePrice();
+
+                if(player.getBalance() >= fortunePrice){
+                    p.sendMessage(mm.deserialize("<green>Successfully bought another fortune level!"));
+
+                    player.setBalance(player.getBalance() - fortunePrice);
+                    player.setFortune(player.getFortune() + 1);
+                    player.setFortunePrice(player.getFortunePrice() * 2);
+                    p.playSound(p, Sound.ENTITY_PLAYER_LEVELUP, 1, 0);
+
+                    event.getInventory().setItem(event.getSlot(), new FortuneBook(player.getFortune(), player.getFortunePrice()));
+                }else{
+                    p.sendMessage(mm.deserialize("<red>Insufficient balance to do this purchase!"));
+                    p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 1);
                 }
 
             }else if(UtilBlocks.getMineSlots().contains(event.getSlot())){
@@ -91,31 +112,8 @@ public class EventsListener implements Listener {
                     Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId())), 120);
                 }
             }
-        }else if(event.getView().title().equals(UtilGUI.getBlocksTitle())){
+        }else if(event.getView().title().equals(UtilGUI.getBlocksTitle())) {
             event.setCancelled(true);
-        }else if(event.getView().title().equals(UtilGUI.getEnchantTitle())){
-            event.setCancelled(true);
-
-            if(event.getSlot() == 2){
-
-                PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
-
-                int fortunePrice = player.getFortunePrice();
-
-                if(player.getBalance() >= fortunePrice){
-                    p.sendMessage(mm.deserialize("<green>Successfully bought another fortune level!"));
-
-                    player.setBalance(player.getBalance() - fortunePrice);
-                    player.setFortune(player.getFortune() + 1);
-                    player.setFortunePrice(player.getFortunePrice() * 2);
-                    p.playSound(p, Sound.ENTITY_PLAYER_LEVELUP, 1, 0);
-
-                    event.getInventory().setItem(event.getSlot(), new FortuneBook(player.getFortune(), player.getFortunePrice()));
-                }else{
-                    p.sendMessage(mm.deserialize("<red>Insufficient balance to do this purchase!"));
-                    p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 1);
-                }
-            }
         }
     }
 

@@ -36,6 +36,7 @@ public class UtilGUI {
 
         temp.setItem(0, getPlayerSkull(p));
         temp.setItem(8, new UpgradeChest(player.getUpgrades(), player.getUpgradePrice()));
+        temp.setItem(45, new FortuneBook(player.getFortune(), player.getFortunePrice()));
 
         fillInv(temp, new InvFrame());
 
@@ -53,18 +54,6 @@ public class UtilGUI {
         }
 
         fillInv(temp, new LockedItem());
-
-        return temp;
-    }
-
-    public static Inventory getFortuneInventory(Player p){
-
-        Inventory temp = Bukkit.createInventory(null, InventoryType.HOPPER, getEnchantTitle());
-
-        PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
-        temp.setItem(2, new FortuneBook(player.getFortune(), player.getFortunePrice()));
-
-        fillInv(temp, new InvFrame());
 
         return temp;
     }
@@ -104,10 +93,6 @@ public class UtilGUI {
 
     public static Component getBoxTitle() {
         return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Player Box</gradient>");
-    }
-
-    public static Component getEnchantTitle() {
-        return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Player Fortune</gradient>");
     }
 
     public static Component getPlayerDisplayName(Player p) {
