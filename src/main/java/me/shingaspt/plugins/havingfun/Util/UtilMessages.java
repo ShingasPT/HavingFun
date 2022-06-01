@@ -48,13 +48,13 @@ public class UtilMessages {
 
     public static Component getStarterMessage(){
         return mm.deserialize("<newline>" +
-                "<gradient:#D400FF:#B40092:#9F15FF>╔═════════════════════════════════╗</gradient><newline>" +
+                "<gradient:#D400FF:#B40092:#9F15FF>╔════════════════════════════════╗</gradient><newline>" +
                 "<newline>" +
                 "  <gray>Start Your Journey With <gradient:#9F15FF:#E304FF>/mine</gradient><newline>" +
                 "  <gray>Check Your/a Players Blocks With <gradient:#9F15FF:#E304FF>/blocks [player]</gradient><newline>" +
                 "  <gray>There's a low chance of getting a <green>Cash Boost <gray>while mining!<newline>" +
                 "<newline>" +
-                "<gradient:#D400FF:#B40092>╚═════════════════════════════════╝</gradient>" +
+                "<gradient:#D400FF:#B40092>╚════════════════════════════════╝</gradient>" +
                 "<newline>");
     }
 
