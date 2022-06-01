@@ -1,6 +1,5 @@
 package me.shingaspt.plugins.havingfun;
 
-import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import me.shingaspt.plugins.havingfun.Data.PlayerData;
 import me.shingaspt.plugins.havingfun.Items.CashBoost;
@@ -11,8 +10,6 @@ import me.shingaspt.plugins.havingfun.Util.UtilBlocks;
 import me.shingaspt.plugins.havingfun.Util.UtilGUI;
 import me.shingaspt.plugins.havingfun.Util.UtilMessages;
 import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
-import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -27,17 +24,13 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class EventsListener implements Listener {
 
     private final MiniMessage mm = MiniMessage.miniMessage();
-    private static HashMap<UUID, Integer> boosts = new HashMap<>();
+    private static final HashMap<UUID, Integer> boosts = new HashMap<>();
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event){
@@ -70,13 +63,13 @@ public class EventsListener implements Listener {
                 }
 
             }else if(UtilBlocks.getMineSlots().contains(event.getSlot())){
-                if(!(event.getCurrentItem().isSimilar(new PlaceholderItem()))){
+                if(!(Objects.requireNonNull(event.getCurrentItem()).isSimilar(new PlaceholderItem()))){
                     PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
 
                     PersistentDataContainer container = event.getCurrentItem().getItemMeta().getPersistentDataContainer();
                     NamespacedKey key = new NamespacedKey(HavingFun.getInstance(), "Reward");
 
-                    int reward = container.get(key, PersistentDataType.INTEGER);
+                    int reward = container.getOrDefault(key, PersistentDataType.INTEGER, 0);
                     int boost = boosts.get(p.getUniqueId()) != null ? boosts.get(p.getUniqueId()) : 0;
 
                     player.setBalance(player.getBalance() + reward + player.getFortune() + boost);
@@ -95,9 +88,7 @@ public class EventsListener implements Listener {
 
                     event.getInventory().setItem(0, UtilGUI.getPlayerSkull(p));
                     event.getInventory().setItem(event.getSlot(), new PlaceholderItem());
-                    Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {
-                        event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId()));
-                    }, 120);
+                    Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId())), 120);
                 }
             }
         }else if(event.getView().title().equals(UtilGUI.getBlocksTitle())){
@@ -131,12 +122,7 @@ public class EventsListener implements Listener {
     @EventHandler
     public void onChat(AsyncChatEvent event){
 
-        event.renderer(new ChatRenderer() {
-            @Override
-            public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
-                return UtilMessages.getChatFormat(event.getPlayer(), event.message());
-            }
-        });
+        event.renderer((source, sourceDisplayName, message, viewer) -> UtilMessages.getChatFormat(event.getPlayer(), event.message()));
     }
 
     @EventHandler
@@ -159,6 +145,7 @@ public class EventsListener implements Listener {
     public void onRightClick(PlayerInteractEvent event){
         Player p = event.getPlayer();
         ItemStack item = event.getItem();
+        assert item != null;
         PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
         NamespacedKey boost = new NamespacedKey(HavingFun.getInstance(), "boost");
         NamespacedKey time = new NamespacedKey(HavingFun.getInstance(), "time");
@@ -172,7 +159,7 @@ public class EventsListener implements Listener {
                 Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {
                     boosts.remove(p.getUniqueId());
                     p.sendMessage(mm.deserialize("<red>Your cash boost has finished!"));
-                }, ((container.get(time, PersistentDataType.INTEGER)) * 60) * 20);
+                }, ((container.getOrDefault(time, PersistentDataType.INTEGER, 1)) * 60) * 20);
             }
         }
     }

@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public final class HavingFun extends JavaPlugin {
 
@@ -17,9 +18,9 @@ public final class HavingFun extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        getCommand("box").setExecutor(new CMDBox());
-        getCommand("blocks").setExecutor(new CMDBlocks());
-        getCommand("fortune").setExecutor(new CMDFortune());
+        Objects.requireNonNull(getCommand("box")).setExecutor(new CMDBox());
+        Objects.requireNonNull(getCommand("blocks")).setExecutor(new CMDBlocks());
+        Objects.requireNonNull(getCommand("fortune")).setExecutor(new CMDFortune());
         getServer().getPluginManager().registerEvents(new EventsListener(), this);
         UtilBlocks.loadBlocks();
         try{
