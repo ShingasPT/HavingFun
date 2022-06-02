@@ -1,5 +1,6 @@
 package me.shingaspt.plugins.havingfun.Data;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class PlayerData {

@@ -11,6 +11,8 @@ import me.shingaspt.plugins.havingfun.Util.UtilGUI;
 import me.shingaspt.plugins.havingfun.Util.UtilMessages;
 import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -119,7 +121,6 @@ public class EventsListener implements Listener {
 
     @EventHandler
     public void onChat(AsyncChatEvent event){
-
         event.renderer((source, sourceDisplayName, message, viewer) -> UtilMessages.getChatFormat(event.getPlayer(), event.message()));
     }
 
