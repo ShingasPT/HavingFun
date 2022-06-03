@@ -9,20 +9,14 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.UUID;
 
 public class UtilGUI {
 
@@ -51,7 +45,7 @@ public class UtilGUI {
 
     }
 
-    public static Inventory getBlocksInventory(Player p) {
+    public static Inventory getBlocksInventory(OfflinePlayer p) {
 
         Inventory temp = Bukkit.createInventory(null, 54, getBlocksTitle());
 
@@ -73,7 +67,7 @@ public class UtilGUI {
         }
     }
 
-    public static ItemStack getPlayerSkull(Player p){
+    public static ItemStack getPlayerSkull(OfflinePlayer p){
 
         ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1 );
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
@@ -103,8 +97,8 @@ public class UtilGUI {
         return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Mine</gradient>");
     }
 
-    public static Component getPlayerDisplayName(Player p) {
-        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
+    public static Component getPlayerDisplayName(OfflinePlayer p) {
+        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", Objects.requireNonNull(p.getPlayer()).displayName()));
         return mm.deserialize("<italic:false><player>",placeholder);
     }
 }

@@ -32,13 +32,14 @@ public class CMDBlocks implements TabExecutor {
         switch(args.length) {
             case 0 -> p.openInventory(UtilGUI.getBlocksInventory(p));
             case 1 -> {
-                if(UtilPlayerData.getPlayerFromUUID(Bukkit.getOfflinePlayerIfCached(args[0]).getUniqueId()) != null){
-                    Player player = (Player) Bukkit.getOfflinePlayer(args[0]);
-                    p.openInventory(UtilGUI.getBlocksInventory(player));
-                }else{
+
+                OfflinePlayer player = Bukkit.getOfflinePlayerIfCached(args[0]);
+                if(player == null){
                     p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 0);
-                    p.sendMessage(mm.deserialize("<red>This player does not exist!"));
+                    p.sendMessage(mm.deserialize("<gray>This <red>player <gray>does not exist or the name is incorrect!"));
+                    return true;
                 }
+                p.openInventory(UtilGUI.getBlocksInventory(player));
             }
         }
 

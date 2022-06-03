@@ -7,7 +7,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.milkbowl.vault.chat.Chat;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -60,7 +59,7 @@ public class UtilMessages {
     public static Component getNewJoinMessage(Player p) {
         TagResolver placeholders = TagResolver.resolver(Placeholder.component("player", p.displayName()),
                                                         Placeholder.parsed("rank", getPrefix(p)),
-                                                        Placeholder.parsed("unique", String.valueOf(Bukkit.getOfflinePlayers().length)));
+                                                        Placeholder.parsed("unique", String.valueOf(UtilPlayerData.getPlayers().size())));
         return mm.deserialize("<gray>Welcome <rank><player> <gray>to the server! <gray>#<white><unique>", placeholders);
     }
 

@@ -138,8 +138,8 @@ public class EventsListener implements Listener {
             event.joinMessage(UtilMessages.getJoinMessage(event.getPlayer()));
         }else{
             UtilPlayerData.createNewPlayer(event.getPlayer());
-            event.joinMessage(UtilMessages.getNewJoinMessage(event.getPlayer()));
             event.getPlayer().sendMessage(UtilMessages.getStarterMessage());
+            event.joinMessage(UtilMessages.getNewJoinMessage(event.getPlayer()));
         }
     }
 
