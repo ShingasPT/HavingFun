@@ -26,9 +26,19 @@ public class CMDUnmute implements TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
+        if(args.length == 0){
+            sender.sendMessage(mm.deserialize("<red>/unmute <gray><player>"));
+            return true;
+        }
+
         Player p = Bukkit.getPlayer(args[0]);
         if(p == null){
             sender.sendMessage(mm.deserialize("<gray>This <red>player <gray>does not exist or is not online!"));
+            return true;
+        }
+
+        if(!(p.hasPermission("admin.unmute"))){
+            p.sendMessage(mm.deserialize("<gray>You do not have <red>permission <gray>for this!"));
             return true;
         }
 
