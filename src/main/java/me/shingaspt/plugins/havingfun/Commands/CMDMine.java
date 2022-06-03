@@ -12,7 +12,7 @@ public class CMDMine implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if(!(sender instanceof Player p)){
+        if(!(sender instanceof Player p)) {
             sender.sendMessage("Console is not allowed to run this command!");
             return true;
         }

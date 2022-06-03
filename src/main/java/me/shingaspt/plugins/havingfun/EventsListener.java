@@ -11,8 +11,6 @@ import me.shingaspt.plugins.havingfun.Util.UtilGUI;
 import me.shingaspt.plugins.havingfun.Util.UtilMessages;
 import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -120,8 +118,18 @@ public class EventsListener implements Listener {
     }
 
     @EventHandler
-    public void onChat(AsyncChatEvent event){
-        event.renderer((source, sourceDisplayName, message, viewer) -> UtilMessages.getChatFormat(event.getPlayer(), event.message()));
+    public void onChat(AsyncChatEvent event) {
+
+        PlayerData player = UtilPlayerData.getPlayerFromUUID(event.getPlayer().getUniqueId());
+        Date date = (player.getMute() == null) ? new Date() : player.getMute();
+
+        if(new Date().compareTo(date) >= 0){
+            event.renderer((source, sourceDisplayName, message, viewer) -> UtilMessages.getChatFormat(event.getPlayer(), event.message()));
+        }else {
+            event.setCancelled(true);
+            event.getPlayer().sendMessage(mm.deserialize("<gray>You are currently <red>muted<gray>!"));
+        }
+
     }
 
     @EventHandler
@@ -144,23 +152,23 @@ public class EventsListener implements Listener {
     public void onRightClick(PlayerInteractEvent event){
         Player p = event.getPlayer();
         ItemStack item = event.getItem();
-        assert item != null;
-        PersistentDataContainer container = Objects.requireNonNull(item.getItemMeta().getPersistentDataContainer());
-        NamespacedKey boost = new NamespacedKey(HavingFun.getInstance(), "boost");
-        NamespacedKey time = new NamespacedKey(HavingFun.getInstance(), "time");
-        if(container.has(boost)){
-            if(boosts.containsKey(p.getUniqueId())){
-                p.sendMessage(mm.deserialize("<red>You have an already going boost! Wait until it ends."));
-            }else{
-                p.getInventory().remove(item);
-                boosts.put(p.getUniqueId(), container.get(boost, PersistentDataType.INTEGER));
-                p.sendMessage(mm.deserialize("<green>Your cash boost has been activated!"));
-                Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {
-                    boosts.remove(p.getUniqueId());
-                    p.sendMessage(mm.deserialize("<red>Your cash boost has finished!"));
-                }, ((container.getOrDefault(time, PersistentDataType.INTEGER, 1)) * 60) * 20);
+        if(item != null){
+            PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
+            NamespacedKey boost = new NamespacedKey(HavingFun.getInstance(), "boost");
+            NamespacedKey time = new NamespacedKey(HavingFun.getInstance(), "time");
+            if(container.has(boost)){
+                if(boosts.containsKey(p.getUniqueId())){
+                    p.sendMessage(mm.deserialize("<red>You have an already going boost! Wait until it ends."));
+                }else{
+                    p.getInventory().remove(item);
+                    boosts.put(p.getUniqueId(), container.get(boost, PersistentDataType.INTEGER));
+                    p.sendMessage(mm.deserialize("<green>Your cash boost has been activated!"));
+                    Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> {
+                        boosts.remove(p.getUniqueId());
+                        p.sendMessage(mm.deserialize("<red>Your cash boost has finished!"));
+                    }, ((container.getOrDefault(time, PersistentDataType.INTEGER, 1)) * 60) * 20);
+                }
             }
         }
     }
-
 }

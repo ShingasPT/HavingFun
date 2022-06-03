@@ -31,19 +31,20 @@ public class UtilMessages {
     public static Component getJoinMessage(Player p) {
         TagResolver placeholders = TagResolver.resolver(Placeholder.component("player", p.displayName()),
                                                         Placeholder.parsed("rank", getPrefix(p)));
-        return mm.deserialize("<gray>Welcome Back <rank><light_purple><player> <gray>[<green>+<gray>]", placeholders);
+        return mm.deserialize("<gray>Welcome Back <rank><player> <gray>[<green>+<gray>]", placeholders);
     }
 
     public static Component getNewJoinMessage(Player p) {
         TagResolver placeholders = TagResolver.resolver(Placeholder.component("player", p.displayName()),
                                                         Placeholder.parsed("rank", getPrefix(p)),
                                                         Placeholder.parsed("unique", String.valueOf(Bukkit.getOfflinePlayers().length)));
-        return mm.deserialize("<gray>Welcome <rank><light_purple><player> <gray>to the server! <gray>#<white><unique>", placeholders);
+        return mm.deserialize("<gray>Welcome <rank><player> <gray>to the server! <gray>#<white><unique>", placeholders);
     }
 
     public static Component getLeaveMessage(Player p) {
-        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()));
-        return mm.deserialize("<gray>Hope to see you soon <light_purple><player> <gray>[<red>-<gray>]", placeholder);
+        TagResolver placeholder = TagResolver.resolver(Placeholder.component("player", p.displayName()),
+                                                       Placeholder.parsed("rank", getPrefix(p)));
+        return mm.deserialize("<gray>Hope to see you soon <rank><player> <gray>[<red>-<gray>]", placeholder);
     }
 
     public static Component getStarterMessage(){

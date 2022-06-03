@@ -11,6 +11,8 @@ public class PlayerData {
     private int upgradePrice;
     private int fortune;
     private int fortunePrice;
+    private Date mute;
+    private boolean muted;
     private final UUID uuid;
 
     public PlayerData(UUID uuid){
@@ -20,6 +22,8 @@ public class PlayerData {
         this.upgradePrice = 100;
         this.fortune = 0;
         this.fortunePrice = 500;
+        this.mute = null;
+        this.muted = false;
         this.uuid = uuid;
     }
 
@@ -71,5 +75,21 @@ public class PlayerData {
 
     public void setFortunePrice(int fortunePrice) {
         this.fortunePrice = fortunePrice;
+    }
+
+    public Date getMute() {
+        return mute;
+    }
+
+    public void setMute(Date mute) {
+        this.mute = mute;
+    }
+
+    public boolean isMuted() {
+        return muted;
+    }
+
+    public void setMuted(boolean muted) {
+        this.muted = muted;
     }
 }

@@ -2,12 +2,15 @@ package me.shingaspt.plugins.havingfun;
 
 import me.shingaspt.plugins.havingfun.Commands.CMDBlocks;
 import me.shingaspt.plugins.havingfun.Commands.CMDMine;
+import me.shingaspt.plugins.havingfun.Commands.CMDMute;
+import me.shingaspt.plugins.havingfun.Commands.CMDUnmute;
 import me.shingaspt.plugins.havingfun.Util.UtilBlocks;
 import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Objects;
 
 public final class HavingFun extends JavaPlugin {
@@ -19,6 +22,8 @@ public final class HavingFun extends JavaPlugin {
         instance = this;
         Objects.requireNonNull(getCommand("mine")).setExecutor(new CMDMine());
         Objects.requireNonNull(getCommand("blocks")).setExecutor(new CMDBlocks());
+        Objects.requireNonNull(getCommand("mute")).setExecutor(new CMDMute());
+        Objects.requireNonNull(getCommand("unmute")).setExecutor(new CMDUnmute());
         getServer().getPluginManager().registerEvents(new EventsListener(), this);
         UtilBlocks.loadBlocks();
         try{

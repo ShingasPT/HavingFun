@@ -13,3 +13,7 @@ commands:
     description: 'Opens Your Mine Gui'
   blocks:
     description: 'Shows yours/a players Unlocked Blocks'
+  mute:
+    description: 'Mutes a Player for a Certain Amount of Time'
+  unmute:
+    description: 'Unmutes a muted Player'
