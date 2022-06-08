@@ -1,22 +1,17 @@
 package me.shingaspt.plugins.havingfun;
 
-import me.shingaspt.plugins.havingfun.Commands.CMDBlocks;
-import me.shingaspt.plugins.havingfun.Commands.CMDMine;
-import me.shingaspt.plugins.havingfun.Commands.CMDMute;
-import me.shingaspt.plugins.havingfun.Commands.CMDUnmute;
-import me.shingaspt.plugins.havingfun.Util.UtilBlocks;
-import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
+import me.shingaspt.plugins.havingfun.commands.*;
+import me.shingaspt.plugins.havingfun.util.UtilBlocks;
+import me.shingaspt.plugins.havingfun.util.UtilPlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.Objects;
 
 public final class HavingFun extends JavaPlugin {
 
     private static HavingFun instance;
-
     @Override
     public void onEnable() {
         instance = this;
@@ -24,6 +19,8 @@ public final class HavingFun extends JavaPlugin {
         Objects.requireNonNull(getCommand("blocks")).setExecutor(new CMDBlocks());
         Objects.requireNonNull(getCommand("mute")).setExecutor(new CMDMute());
         Objects.requireNonNull(getCommand("unmute")).setExecutor(new CMDUnmute());
+        Objects.requireNonNull(getCommand("adminBal")).setExecutor(new CMDAdminBalance());
+        Objects.requireNonNull(getCommand("stats")).setExecutor(new CMDStats());
         getServer().getPluginManager().registerEvents(new EventsListener(), this);
         UtilBlocks.loadBlocks();
         try{

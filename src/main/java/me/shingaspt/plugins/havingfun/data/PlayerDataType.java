@@ -1,4 +1,4 @@
-package me.shingaspt.plugins.havingfun.Data;
+package me.shingaspt.plugins.havingfun.data;
 
 import com.google.gson.reflect.TypeToken;
 

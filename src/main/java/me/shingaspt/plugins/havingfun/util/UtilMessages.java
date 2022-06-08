@@ -1,4 +1,4 @@
-package me.shingaspt.plugins.havingfun.Util;
+package me.shingaspt.plugins.havingfun.util;
 
 import me.shingaspt.plugins.havingfun.HavingFun;
 import net.kyori.adventure.text.Component;
@@ -53,7 +53,7 @@ public class UtilMessages {
     public static Component getJoinMessage(Player p) {
         TagResolver placeholders = TagResolver.resolver(Placeholder.component("player", p.displayName()),
                                                         Placeholder.parsed("rank", getPrefix(p)));
-        return mm.deserialize("<gray>Welcome Back <rank><player> <gray>[<green>+<gray>]", placeholders);
+        return mm.deserialize("<gray>Welcome back <rank><player> <gray>[<green>+<gray>]", placeholders);
     }
 
     public static Component getNewJoinMessage(Player p) {
@@ -74,6 +74,7 @@ public class UtilMessages {
                 "<gradient:#D400FF:#B40092:#9F15FF>╔════════════════════════════════╗</gradient><newline>" +
                 "<newline>" +
                 "  <gray>Start Your Journey With <gradient:#9F15FF:#E304FF>/mine</gradient><newline>" +
+                "  <gray>Check your Statistics With <gradient:#9F15FF:#E304FF>/stats [player]</gradient><newline>" +
                 "  <gray>Check Your/a Players Blocks With <gradient:#9F15FF:#E304FF>/blocks [player]</gradient><newline>" +
                 "  <gray>There's a low chance of getting a <green>Cash Boost <gray>while mining!<newline>" +
                 "<newline>" +

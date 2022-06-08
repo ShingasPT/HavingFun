@@ -1,4 +1,4 @@
-package me.shingaspt.plugins.havingfun.Blocks;
+package me.shingaspt.plugins.havingfun.blocks;
 
 import me.shingaspt.plugins.havingfun.HavingFun;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -13,20 +13,20 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 
-public class IronOre extends ItemStack {
+public class RedstoneOre extends ItemStack {
 
     private static final MiniMessage mm = MiniMessage.miniMessage();
 
-    public IronOre(){
+    public RedstoneOre(){
         this.setAmount(1);
-        this.setType(Material.IRON_ORE);
+        this.setType(Material.REDSTONE_ORE);
 
         ItemMeta meta = this.getItemMeta();
-        meta.displayName(mm.deserialize("<italic:false><gradient:#FFC3A2:#FDF4D3>Iron Ore"));
+        meta.displayName(mm.deserialize("<italic:false><gradient:#C60000:#FD3E01>Redstone Ore"));
 
         PersistentDataContainer container = meta.getPersistentDataContainer();
         NamespacedKey key = new NamespacedKey(HavingFun.getInstance(), "Reward");
-        container.set(key, PersistentDataType.INTEGER, 3);
+        container.set(key, PersistentDataType.INTEGER, 5);
 
         TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("reward", String.valueOf(container.get(key, PersistentDataType.INTEGER))));
         meta.lore(Arrays.asList(mm.deserialize(""),
@@ -34,5 +34,4 @@ public class IronOre extends ItemStack {
 
         this.setItemMeta(meta);
     }
-
 }

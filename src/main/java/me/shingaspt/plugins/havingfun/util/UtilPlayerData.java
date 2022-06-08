@@ -1,14 +1,9 @@
-package me.shingaspt.plugins.havingfun.Util;
+package me.shingaspt.plugins.havingfun.util;
 
 import com.google.gson.Gson;
-import me.shingaspt.plugins.havingfun.Data.PlayerData;
-import me.shingaspt.plugins.havingfun.Data.PlayerDataType;
+import me.shingaspt.plugins.havingfun.data.PlayerData;
+import me.shingaspt.plugins.havingfun.data.PlayerDataType;
 import me.shingaspt.plugins.havingfun.HavingFun;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
-import org.apache.commons.lang.time.DateUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -17,33 +12,7 @@ import java.util.*;
 
 public class UtilPlayerData {
 
-    private static final MiniMessage mm = MiniMessage.miniMessage();
-
     private static Map<UUID, PlayerData> players = new HashMap<>();
-
-    public static int getBalance(UUID uuid){
-        return players.get(uuid).getBalance();
-    }
-
-    public static void setBalance(UUID uuid, int balance){
-        players.get(uuid).setBalance(balance);
-    }
-
-    public static int getUpgrades(UUID uuid){
-        return players.get(uuid).getUpgrades();
-    }
-
-    public static int getUpgradePrice(UUID uuid){
-        return players.get(uuid).getUpgradePrice();
-    }
-
-    public static int getPlayerMinedBlocks(UUID uuid) { return players.get(uuid).getMined(); }
-
-    public static void setPlayerMinedBlocks(UUID uuid, int n) { players.get(uuid).setMined(n); }
-
-    public static int getPlayerFortune(UUID uuid) { return players.get(uuid).getFortune(); }
-
-    public static void setPlayerFortune(UUID uuid, int fortune) { players.get(uuid).setFortune(fortune); }
 
     public static Map<UUID, PlayerData> getPlayers() { return players; }
 

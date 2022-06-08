@@ -1,7 +1,7 @@
-package me.shingaspt.plugins.havingfun.Util;
+package me.shingaspt.plugins.havingfun.util;
 
-import me.shingaspt.plugins.havingfun.Blocks.*;
-import me.shingaspt.plugins.havingfun.Data.PlayerData;
+import me.shingaspt.plugins.havingfun.blocks.*;
+import me.shingaspt.plugins.havingfun.data.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 

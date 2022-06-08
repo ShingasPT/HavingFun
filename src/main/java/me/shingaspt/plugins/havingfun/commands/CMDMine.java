@@ -1,6 +1,6 @@
-package me.shingaspt.plugins.havingfun.Commands;
+package me.shingaspt.plugins.havingfun.commands;
 
-import me.shingaspt.plugins.havingfun.Util.UtilGUI;
+import me.shingaspt.plugins.havingfun.util.UtilGUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

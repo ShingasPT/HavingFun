@@ -1,8 +1,8 @@
-package me.shingaspt.plugins.havingfun.Commands;
+package me.shingaspt.plugins.havingfun.commands;
 
-import me.shingaspt.plugins.havingfun.Data.PlayerData;
+import me.shingaspt.plugins.havingfun.data.PlayerData;
 import me.shingaspt.plugins.havingfun.HavingFun;
-import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
+import me.shingaspt.plugins.havingfun.util.UtilPlayerData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -31,7 +31,7 @@ public class CMDMute implements TabExecutor {
 
 
         if(args.length == 0){
-            sender.sendMessage(mm.deserialize("<red>/mute <gray><player> [timespan] [reason] "));
+            sender.sendMessage(mm.deserialize("<red>/mute <gray><player> [time-span] [reason] "));
             return true;
         }
 

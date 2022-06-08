@@ -1,15 +1,15 @@
 package me.shingaspt.plugins.havingfun;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
-import me.shingaspt.plugins.havingfun.Data.PlayerData;
-import me.shingaspt.plugins.havingfun.Items.CashBoost;
-import me.shingaspt.plugins.havingfun.Items.FortuneBook;
-import me.shingaspt.plugins.havingfun.Items.PlaceholderItem;
-import me.shingaspt.plugins.havingfun.Items.UpgradeChest;
-import me.shingaspt.plugins.havingfun.Util.UtilBlocks;
-import me.shingaspt.plugins.havingfun.Util.UtilGUI;
-import me.shingaspt.plugins.havingfun.Util.UtilMessages;
-import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
+import me.shingaspt.plugins.havingfun.data.PlayerData;
+import me.shingaspt.plugins.havingfun.items.CashBoost;
+import me.shingaspt.plugins.havingfun.items.FortuneBook;
+import me.shingaspt.plugins.havingfun.items.PlaceholderItem;
+import me.shingaspt.plugins.havingfun.items.UpgradeChest;
+import me.shingaspt.plugins.havingfun.util.UtilBlocks;
+import me.shingaspt.plugins.havingfun.util.UtilGUI;
+import me.shingaspt.plugins.havingfun.util.UtilMessages;
+import me.shingaspt.plugins.havingfun.util.UtilPlayerData;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -39,7 +39,7 @@ public class EventsListener implements Listener {
 
         if(event.getView().title().equals(UtilGUI.getBoxTitle())){
             event.setCancelled(true);
-            if (event.getSlot() == 8) {
+            if (event.getSlot() == 0) {
                 PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
                 int upgrades = player.getUpgrades();
                 int upgradePrice = player.getUpgradePrice();
@@ -54,15 +54,14 @@ public class EventsListener implements Listener {
                         player.setUpgrades(player.getUpgrades() + 1);
                         player.setUpgradePrice(player.getUpgradePrice() * 2);
                         p.playSound(p, Sound.ENTITY_PLAYER_LEVELUP, 1, 0);
-                        event.getInventory().setItem(8, new UpgradeChest(player.getUpgrades(), player.getUpgradePrice()));
-                        event.getInventory().setItem(0, UtilGUI.getPlayerSkull(p));
+                        event.getInventory().setItem(event.getSlot(), new UpgradeChest(player.getUpgrades(), player.getUpgradePrice()));
                     } else {
                         p.sendMessage(mm.deserialize("<red>Insufficient balance to do this purchase!"));
                         p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 1);
                     }
                 }
 
-            }else if (event.getSlot() == 45){
+            }else if (event.getSlot() == 8){
                 event.setCancelled(true);
 
                 PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
@@ -107,12 +106,13 @@ public class EventsListener implements Listener {
                         p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                     }
 
-                    event.getInventory().setItem(0, UtilGUI.getPlayerSkull(p));
                     event.getInventory().setItem(event.getSlot(), new PlaceholderItem());
                     Bukkit.getScheduler().runTaskLater(HavingFun.getInstance(), () -> event.getInventory().setItem(event.getSlot(), UtilBlocks.getRandomBlock(p.getUniqueId())), 120);
                 }
             }
         }else if(event.getView().title().equals(UtilGUI.getBlocksTitle())) {
+            event.setCancelled(true);
+        }else if (event.getView().title().equals(UtilGUI.getStatsTitle())){
             event.setCancelled(true);
         }
     }

@@ -1,8 +1,8 @@
-package me.shingaspt.plugins.havingfun.Commands;
+package me.shingaspt.plugins.havingfun.commands;
 
-import me.shingaspt.plugins.havingfun.Data.PlayerData;
+import me.shingaspt.plugins.havingfun.data.PlayerData;
 import me.shingaspt.plugins.havingfun.HavingFun;
-import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
+import me.shingaspt.plugins.havingfun.util.UtilPlayerData;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;

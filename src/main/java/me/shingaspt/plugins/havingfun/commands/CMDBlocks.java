@@ -1,7 +1,6 @@
-package me.shingaspt.plugins.havingfun.Commands;
+package me.shingaspt.plugins.havingfun.commands;
 
-import me.shingaspt.plugins.havingfun.Util.UtilGUI;
-import me.shingaspt.plugins.havingfun.Util.UtilPlayerData;
+import me.shingaspt.plugins.havingfun.util.UtilGUI;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -36,7 +35,7 @@ public class CMDBlocks implements TabExecutor {
                 OfflinePlayer player = Bukkit.getOfflinePlayerIfCached(args[0]);
                 if(player == null){
                     p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1, 0);
-                    p.sendMessage(mm.deserialize("<gray>This <red>player <gray>does not exist or the name is incorrect!"));
+                    p.sendMessage(mm.deserialize("<gray>This <red>player <gray>does not exist!"));
                     return true;
                 }
                 p.openInventory(UtilGUI.getBlocksInventory(player));

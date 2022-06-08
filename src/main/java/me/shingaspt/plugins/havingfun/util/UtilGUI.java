@@ -1,8 +1,8 @@
-package me.shingaspt.plugins.havingfun.Util;
+package me.shingaspt.plugins.havingfun.util;
 
-import me.shingaspt.plugins.havingfun.Data.PlayerData;
+import me.shingaspt.plugins.havingfun.data.PlayerData;
 import me.shingaspt.plugins.havingfun.HavingFun;
-import me.shingaspt.plugins.havingfun.Items.*;
+import me.shingaspt.plugins.havingfun.items.*;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -35,9 +36,8 @@ public class UtilGUI {
 
         PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
 
-        temp.setItem(0, getPlayerSkull(p));
-        temp.setItem(8, new UpgradeChest(player.getUpgrades(), player.getUpgradePrice()));
-        temp.setItem(45, new FortuneBook(player.getFortune(), player.getFortunePrice()));
+        temp.setItem(0, new UpgradeChest(player.getUpgrades(), player.getUpgradePrice()));
+        temp.setItem(8, new FortuneBook(player.getFortune(), player.getFortunePrice()));
 
         fillInv(temp, new InvFrame());
 
@@ -59,6 +59,18 @@ public class UtilGUI {
         return temp;
     }
 
+    public static Inventory getStatsInventory(OfflinePlayer p){
+
+        Inventory temp = Bukkit.createInventory(null, InventoryType.HOPPER, getStatsTitle());
+
+        temp.setItem(2, getPlayerSkull(p));
+
+        fillInv(temp, new InvFrame());
+
+        return temp;
+
+    }
+
     private static void fillInv(Inventory inv, ItemStack item) {
         for(int i = 0; i < inv.getSize(); i++){
             if(inv.getItem(i) == null){
@@ -72,12 +84,16 @@ public class UtilGUI {
         ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1 );
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
 
-        TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("balance", String.valueOf(UtilPlayerData.getBalance(p.getUniqueId()))),
-                                                        Placeholder.parsed("blocks", String.valueOf(UtilPlayerData.getPlayerMinedBlocks(p.getUniqueId()))),
-                                                        Placeholder.parsed("fortune", String.valueOf(UtilPlayerData.getPlayerFortune(p.getUniqueId()))),
+        PlayerData player = UtilPlayerData.getPlayerFromUUID(p.getUniqueId());
+
+        TagResolver placeholders = TagResolver.resolver(Placeholder.parsed("playtime", String.valueOf(p.getFirstPlayed())),
+                                                        Placeholder.parsed("balance", String.valueOf(player.getBalance())),
+                                                        Placeholder.parsed("blocks", String.valueOf(player.getMined())),
+                                                        Placeholder.parsed("fortune", String.valueOf(player.getFortune())),
                                                         Placeholder.component("player", getPlayerDisplayName(p)));
 
         skullMeta.lore(Arrays.asList(mm.deserialize(""),
+                                     mm.deserialize("<italic:false><gradient:#A600FF:#D200EC>Playtime » <playtime></gradient>"),
                                      mm.deserialize("<italic:false><gradient:#A600FF:#D200EC>Balance » <balance></gradient>",placeholders),
                                      mm.deserialize("<italic:false><gradient:#A600FF:#D200EC>Fortune » <fortune></gradient>",placeholders),
                                      mm.deserialize("<italic:false><gradient:#A600FF:#D200EC>Mined Blocks » <blocks></gradient>",placeholders)));
@@ -95,6 +111,10 @@ public class UtilGUI {
 
     public static Component getBoxTitle() {
         return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Mine</gradient>");
+    }
+
+    public static Component getStatsTitle() {
+        return mm.deserialize("<italic:false><gradient:#A300FB:#D200FD>Stats</gradient>");
     }
 
     public static Component getPlayerDisplayName(OfflinePlayer p) {

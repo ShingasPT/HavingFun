@@ -1,4 +1,4 @@
-package me.shingaspt.plugins.havingfun.Items;
+package me.shingaspt.plugins.havingfun.items;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;

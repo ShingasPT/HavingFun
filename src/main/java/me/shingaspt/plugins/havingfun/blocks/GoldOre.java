@@ -1,4 +1,4 @@
-package me.shingaspt.plugins.havingfun.Blocks;
+package me.shingaspt.plugins.havingfun.blocks;
 
 import me.shingaspt.plugins.havingfun.HavingFun;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -13,20 +13,20 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 
-public class Cobblestone extends ItemStack {
+public class GoldOre extends ItemStack {
 
     private static final MiniMessage mm = MiniMessage.miniMessage();
 
-    public Cobblestone(){
+    public GoldOre(){
         this.setAmount(1);
-        this.setType(Material.COBBLESTONE);
+        this.setType(Material.GOLD_ORE);
 
         ItemMeta meta = this.getItemMeta();
-        meta.displayName(mm.deserialize("<italic:false><gradient:#6D6D6D:#868686>Cobblestone"));
+        meta.displayName(mm.deserialize("<italic:false><gradient:#FF7A00:#FDD500>Gold Ore"));
 
         PersistentDataContainer container = meta.getPersistentDataContainer();
         NamespacedKey key = new NamespacedKey(HavingFun.getInstance(), "Reward");
-        container.set(key, PersistentDataType.INTEGER, 1);
+        container.set(key, PersistentDataType.INTEGER, 4);
 
         TagResolver placeholder = TagResolver.resolver(Placeholder.parsed("reward", String.valueOf(container.get(key, PersistentDataType.INTEGER))));
         meta.lore(Arrays.asList(mm.deserialize(""),
@@ -34,4 +34,5 @@ public class Cobblestone extends ItemStack {
 
         this.setItemMeta(meta);
     }
+
 }
